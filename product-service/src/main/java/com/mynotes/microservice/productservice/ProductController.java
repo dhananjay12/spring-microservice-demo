@@ -17,5 +17,11 @@ public class ProductController {
 	public String sayHi() {
 		return "Hi";
 	}
+	
+	@GetMapping("/bye")
+	@PreAuthorize("hasAuthority('SYSADMIN')")
+	public String bye() {
+		return "bye";
+	}
 
 }
