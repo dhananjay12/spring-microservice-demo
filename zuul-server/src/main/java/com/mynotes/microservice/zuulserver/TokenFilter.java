@@ -11,10 +11,12 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 
+@Component
 public class TokenFilter extends ZuulFilter {
 
 	@Autowired
