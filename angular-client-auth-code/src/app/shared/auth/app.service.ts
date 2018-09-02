@@ -24,8 +24,7 @@ export class AppService {
     params.append("code", code);
 
     let headers = new HttpHeaders({
-      "Content-type": "application/x-www-form-urlencoded; charset=utf-8",
-      Authorization: "Basic " + btoa(this.clientId + ":secret")
+      "Content-type": "application/x-www-form-urlencoded; charset=utf-8"
     });
     this._http
       .post("http://localhost:8081/token", params.toString(), {
