@@ -77,8 +77,64 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+
+
 		</plugins>
 	</build>
 
+	<profiles>
+		<profile>
+			<activation>
+				<property>
+					<name>docker</name>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>io.fabric8</groupId>
+						<artifactId>docker-maven-plugin</artifactId>
+						<version>0.26.0</version>
+						<extensions>true</extensions>
+						<configuration>
+							<verbose>true</verbose>
+							<images>
+								<image>
+									<alias>app</alias>
+									<name>${project.artifactId}:${project.version}</name>
+									<build>
+										<from>java:8-jre-alpine</from>
+										<tags>
+											<tag>${project.version}</tag>
+										</tags>
+										<entryPoint>
+											<exec>
+												<args>java</args>
+												<!--<args>-Djava.security.egd=file:/dev/./urandom</args> -->
+												<args>-jar</args>
+												<args>/maven/${project.artifactId}-${project.version}.jar</args>
+											</exec>
+										</entryPoint>
+										<assembly>
+											<descriptorRef>artifact</descriptorRef>
+										</assembly>
+									</build>
+								</image>
+							</images>
+						</configuration>
+						<executions>
+							<execution>
+								<id>build</id>
+								<phase>post-integration-test</phase>
+								<goals>
+									<goal>build</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
 
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>

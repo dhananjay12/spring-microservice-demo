@@ -11,9 +11,35 @@
 	<name>demo-root</name>
 	<description>Demo project for Spring Boot</description>
 
+	
+
+	<build>
+		<plugins>
+			 <plugin>
+				<groupId>io.fabric8</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<version>0.26.0</version>
+				<extensions>true</extensions>
+				<configuration>
+				    <verbose>true</verbose>
+				    <!--<dockerHost>http://registry.ameizi.me:2376</dockerHost>-->
+				    <docker.skip>true</docker.skip>
+				    
+				    <!--<pushRegistry>${docker.repostory}</pushRegistry>
+				    <authConfig>
+				        <username>admin</username>
+				        <password>admin</password>
+				    </authConfig>-->
+				</configuration>
+			    </plugin>
+		</plugins>
+	</build>
+
 	 <modules>
 	      <module>jwt-resoure-server</module>
 	      <module>product-service</module>
+	      <module>eureka-service</module>
+	      <module>zuul-server</module>
 	  </modules>
 
 
