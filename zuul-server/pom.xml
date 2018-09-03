@@ -101,12 +101,12 @@
 							<images>
 								<image>
 									<alias>app</alias>
-									<name>${project.artifactId}:${project.version}</name>
+									<name>${project.artifactId}</name>
 									<build>
 										<from>java:8-jre-alpine</from>
-										<tags>
+										<!--<tags>
 											<tag>${project.version}</tag>
-										</tags>
+										</tags>-->
 										<entryPoint>
 											<exec>
 												<args>java</args>
