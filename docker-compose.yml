@@ -1,18 +1,30 @@
-version: '3'
+version: "3"
 services:
+  nginx:
+    build:
+      context: ./nginx
+    volumes:
+      - ./nginx/certs/cert.pem:/etc/nginx/conf.d/cert.pem
+      - ./nginx/certs/key.pem:/etc/nginx/conf.d/key.pem
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - "443:443"
   eureka:
-    image: 'eureka-service:latest'
+    image: "eureka-service:latest"
     environment:
       eureka.client.serviceUrl.defaultZone: http://eureka:8761/eureka/
     ports:
-      - '8761:8761'
+      - "8761:8761"
   zuul:
-    image: 'zuul-server:latest'
+    image: "zuul-server:latest"
     environment:
       eureka.client.serviceUrl.defaultZone: http://eureka:8761/eureka/
     ports:
-      - '8081:8081'
+      - "8081:8081"
   product:
-    image: 'product-service:latest'
+    image: "product-service:latest"
+    environment:
+      - JAVA_OPTS=-Djava.security.egd=file:/dev/./urandom
+      - eureka.client.serviceUrl.defaultZone=http://eureka:8761/eureka/
     ports:
-      - '8090:8090'
+      - "8090:8090"
