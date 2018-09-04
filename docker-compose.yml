@@ -61,9 +61,17 @@ services:
   product:
     image: "product-service:latest"
     environment:
-      - JAVA_OPTS=-Djava.security.egd=file:/dev/./urandom
+      - "JAVA_OPTS=-Djava.security.egd=file:/dev/./urandom -Dspring.profiles.active=dev"
+      - "SPRING_PROFILES_ACTIVE=dev"
     ports:
       - "8090:8090"
+  hello:
+    image: "hello-service:latest"
+    environment:
+      - "JAVA_OPTS=-Djava.security.egd=file:/dev/./urandom -Dspring.profiles.active=dev"
+      - "SPRING_PROFILES_ACTIVE=dev"
+    ports:
+      - "8091:8091"
 
 volumes:
   mysql_data:

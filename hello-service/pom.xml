@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.mynotes.microservice</groupId>
-	<artifactId>product-service</artifactId>
+	<artifactId>hello-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>product-service</name>
+	<name>hello-service</name>
 	<description>Demo project for Spring Boot</description>
 
 	<parent>
@@ -41,20 +41,11 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-oauth2</artifactId>
-		</dependency>
+		</dependency>	
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.mynotes.microservice.common</groupId>
-			<artifactId>jwt-resoure-server</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
+		</dependency>		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -96,7 +87,7 @@
 									<alias>app</alias>
 									<name>${project.artifactId}</name>
 									<build>
-										<from>java:8</from>
+										<from>java:8-jre-alpine</from>
 										<!--<tags>
 											<tag>${project.version}</tag>
 										</tags>-->

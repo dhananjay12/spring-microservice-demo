@@ -28,6 +28,7 @@ public class JwtResourceServerConfig extends ResourceServerConfigurerAdapter {
 	
 	@Override
 	public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
+		//System.out.println("resources");
 		resources.tokenStore(tokenStore()).resourceId(CLIENT_ID);
 		super.configure(resources);
 	}
