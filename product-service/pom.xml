@@ -96,7 +96,7 @@
 									<alias>app</alias>
 									<name>${project.artifactId}</name>
 									<build>
-										<from>java:8</from>
+										<from>java:8-jre-alpine</from>
 										<!--<tags>
 											<tag>${project.version}</tag>
 										</tags>-->
