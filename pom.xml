@@ -38,6 +38,7 @@
 	 <modules>
 	      <module>jwt-resoure-server</module>
 	      <module>product-service</module>
+		  <module>hello-service</module>
 	      <module>eureka-service</module>
 	      <module>zuul-server</module>
 	  </modules>
