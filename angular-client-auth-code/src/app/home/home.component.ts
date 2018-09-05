@@ -22,7 +22,7 @@ export class HomeComponent {
 
   login() {
     window.location.href =
-      "https://dev-298555.oktapreview.com/oauth2/default/v1/authorize?response_type=code&client_id=" +
+      "http://localhost:8082/auth/realms/master/protocol/openid-connect/auth?response_type=code&client_id=" +
       this._service.clientId +
       "&redirect_uri=" +
       this._service.redirectUri +

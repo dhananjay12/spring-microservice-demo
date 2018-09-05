@@ -1,8 +1,29 @@
+zuul:
+  routes:
+    token:
+      path: /token/**
+      url: http://localhost:8082/auth/realms/master/protocol/openid-connect/token
+    product-service:
+      path: /product-service/**
+      service-id: product-service
+      
+
 security:
   oauth2:
-    resource:            
+    client:
+      # From OIDC app
+      clientId: frontend
+      clientSecret: eb5dccec-dd28-4223-babd-69298cd0ad11
+      # From Authorization Server's metadata
+      accessTokenUri: http://localhost:8082/auth/realms/master/protocol/openid-connect/token
+      userAuthorizationUri: http://localhost:8082/auth/realms/master/protocol/openid-connect/auth
+      clientAuthenticationScheme: form
+    resource:
+       # from your Auth Server's metadata, check .well-known/openid-configuration
+      userInfoUri: http://localhost:8082/auth/realms/master/protocol/openid-connect/userinfo
+      preferTokenInfo: false         
       jwt: 
         key-value: 
            -----BEGIN PUBLIC KEY-----
-           MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwWH7v9Oj7HZ5tqpjPtYVtQHdcNxCb+KuPZhmw0ymXP39xePiAOvYkZCj+OO2SzEBgWx44FriSpk9JlW6LHvkhtzU6UE4RMk9u2w+8MUMFLfXXl1LYXMGJ8uCm75+I+MupqVoM9XxLuG561d0OoGeIDGwp54FENNInNpcWqqx+gL0UzVYN3RaGVFAUd53eS118yOwtkCjjDUmWE7Gp4NGJDlB4o00ywSJmiwGFy+z/2v+oh4rtsNaqYsxe96MHHELZFbKKNQubWM5/th1D77jvT5cAUMssZ+b4cRqlHRCWCYWmoCoq2Xxf/bqO1buA3wFVppbR58uDHMpy34iXzI1EwIDAQAB
+           MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAjxSGEYYJOfetVYRapUvPCZrXaYo6UdreGjpr6Rd3+I7NJC+AMBxtOHEkcT09l0lCeY/ScvY1oNlg7djl4MaLOZ7tjTajQnoe7j/1i0ap2LhH1Hiyi+BXx6vw6LKuWdKYuaNptwcGw7D0ptaBH3RbrQ7scckPKxImDVKdZB6Siz0BMigPtVFWkwem5Dz6yjRTpKBzvNGirVcGqYmgXNBF+qoOj02bNAsO8KiPREKK6UfK3+q5ITGzy7GGDJ5yTa1dgLYXMwK43cMdAodGWMdd6q1Ky5TRBfFwdigrpMWC+wkcuBEctAfmIhOpbp1qoFH1A4dbXeF5qwtUTt/67xHYDQIDAQAB
            -----END PUBLIC KEY-----

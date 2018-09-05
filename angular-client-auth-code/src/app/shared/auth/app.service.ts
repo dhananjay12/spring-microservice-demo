@@ -11,7 +11,7 @@ export class Foo {
 
 @Injectable()
 export class AppService {
-  public clientId = "0oaftef7emaTmaT7F0h7";
+  public clientId = "frontend";
   public redirectUri = "http://localhost:4200";
 
   constructor(private _http: HttpClient) {}
@@ -30,15 +30,16 @@ export class AppService {
       .post("http://localhost:8081/token", params.toString(), {
         headers: headers
       })
-      .subscribe(
+      .subscribe( 
         data => this.saveToken(data),
         err => alert("Invalid Credentials")
       );
   }
 
   saveToken(token) {
+    console.log(token);
     var expireDate = new Date().getTime() + 1000 * token.expires_in;
-    Cookie.set("access_token", token.access_token, expireDate);
+    Cookie.set("jwt_token", token.id_token, expireDate);
     console.log("Obtained Access token");
     window.location.href = "http://localhost:4200";
   }
@@ -46,7 +47,7 @@ export class AppService {
   getResource(resourceUrl): Observable<any> {
     var headers = new HttpHeaders({
       "Content-type": "application/x-www-form-urlencoded; charset=utf-8",
-      Authorization: "Bearer " + Cookie.get("access_token")
+      Authorization: "Bearer " + Cookie.get("jwt_token")
     });
     return this._http.get(resourceUrl, { headers: headers }).pipe(
       map(response => response),
@@ -55,7 +56,7 @@ export class AppService {
   }
 
   checkCredentials() {
-    return Cookie.check("access_token");
+    return Cookie.check("jwt_token");
   }
 
   logout() {
