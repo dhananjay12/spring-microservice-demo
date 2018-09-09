@@ -3,7 +3,6 @@ server:
 
 eureka:
   client:
-    enabled: false
     fetchRegistry: false
     registerWithEureka: false
     healthcheck:
