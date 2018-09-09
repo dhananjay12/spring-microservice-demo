@@ -15,7 +15,7 @@ import org.springframework.util.StringUtils;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-	@Value("${security.exclude.url:}")
+	@Value("${app.security.exclude-url:}")
 	private String EXCLUDE_MATCHERS;
 	
 	@Override

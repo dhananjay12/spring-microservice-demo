@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class JwtConverter extends DefaultAccessTokenConverter {
 	
-	@Value("${security.jwt.authority.key}")
+	@Value("${app.security.jwt.authority.key}")
 	private String AUTHORITY_KEY;
 
 	@Override

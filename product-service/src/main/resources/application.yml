@@ -1,8 +1,0 @@
-security:
-  oauth2:
-    resource:            
-      jwt: 
-        key-value: 
-           -----BEGIN PUBLIC KEY-----
-           MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAjxSGEYYJOfetVYRapUvPCZrXaYo6UdreGjpr6Rd3+I7NJC+AMBxtOHEkcT09l0lCeY/ScvY1oNlg7djl4MaLOZ7tjTajQnoe7j/1i0ap2LhH1Hiyi+BXx6vw6LKuWdKYuaNptwcGw7D0ptaBH3RbrQ7scckPKxImDVKdZB6Siz0BMigPtVFWkwem5Dz6yjRTpKBzvNGirVcGqYmgXNBF+qoOj02bNAsO8KiPREKK6UfK3+q5ITGzy7GGDJ5yTa1dgLYXMwK43cMdAodGWMdd6q1Ky5TRBfFwdigrpMWC+wkcuBEctAfmIhOpbp1qoFH1A4dbXeF5qwtUTt/67xHYDQIDAQAB
-           -----END PUBLIC KEY-----

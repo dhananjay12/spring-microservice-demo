@@ -17,10 +17,10 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 @EnableResourceServer
 public class JwtResourceServerConfig extends ResourceServerConfigurerAdapter {
 
-	@Value("${security.jwt.public.signing.key}")
+	@Value("${app.security.jwt.public-key}")
 	private String PUBLIC_KEY;
 	
-	@Value("${security.jwt.client.id}")
+	@Value("${app.security.jwt.client-id}")
 	private String CLIENT_ID;
 
 	@Autowired
