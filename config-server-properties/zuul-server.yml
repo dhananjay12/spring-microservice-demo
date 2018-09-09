@@ -1,0 +1,27 @@
+server:
+  port: 8081
+
+zuul:
+  sensitiveHeaders: Cookie,Set-Cookie,Authorization
+  routes:
+    token:
+      path: /token/**
+      url: http://localhost:8082/auth/realms/master/protocol/openid-connect/token
+    product-service:
+      path: /product-service/**
+      service-id: product-service
+
+security:
+  oauth2:
+    client:
+      # From OIDC app
+      clientId: frontend
+      clientSecret: eb5dccec-dd28-4223-babd-69298cd0ad11
+      # From Authorization Server's metadata
+      accessTokenUri: http://localhost:8082/auth/realms/master/protocol/openid-connect/token
+      userAuthorizationUri: http://localhost:8082/auth/realms/master/protocol/openid-connect/auth
+      clientAuthenticationScheme: form
+    resource:
+       # from your Auth Server's metadata, check .well-known/openid-configuration
+      userInfoUri: http://localhost:8082/auth/realms/master/protocol/openid-connect/userinfo
+      preferTokenInfo: false

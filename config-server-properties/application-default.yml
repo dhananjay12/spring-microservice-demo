@@ -1,5 +1,6 @@
 app:
   security:
+    exclude-url:
     jwt:
       public-key: ${security.oauth2.resource.jwt.key-value}
    
