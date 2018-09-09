@@ -1,0 +1,13 @@
+security:
+  basic:
+    enabled: true
+
+management:
+  security:
+    enabled: true
+
+app:
+  security:
+    jwt:
+      authority:
+        key: groups
