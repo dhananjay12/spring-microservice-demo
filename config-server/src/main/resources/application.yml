@@ -1,0 +1,12 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git :
+          uri: ${SPRING_CLOUD_CONFIG_PATH:https://github.com/dhananjay12/spring-microservice-demo}
+          searchPaths: config-server-properties
