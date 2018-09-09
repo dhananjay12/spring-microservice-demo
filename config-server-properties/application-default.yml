@@ -3,6 +3,7 @@ app:
     exclude-url:
     jwt:
       public-key: ${security.oauth2.resource.jwt.key-value}
+      client-id: frontend
    
       
 security:
