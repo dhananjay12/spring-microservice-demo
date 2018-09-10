@@ -16,7 +16,7 @@ security:
     client:
       # From OIDC app
       clientId: frontend
-      clientSecret: eb5dccec-dd28-4223-babd-69298cd0ad11
+      clientSecret: b4710f0c-d552-45a7-b2ad-7b8caf3455ac
       # From Authorization Server's metadata
       accessTokenUri: http://localhost:8082/auth/realms/master/protocol/openid-connect/token
       userAuthorizationUri: http://localhost:8082/auth/realms/master/protocol/openid-connect/auth

@@ -11,3 +11,8 @@ app:
     jwt:
       authority:
         key: groups
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${SPRING_EUREKA:http://localhost:8761/eureka}

@@ -46,29 +46,42 @@ services:
     command: ["-b=0.0.0.0 -Djboss.http.port=8082"]
     depends_on:
       - mysql
+  config:
+    image: "config-server:latest"
+    environment:
+      - "SPRING_CLOUD_CONFIG_PATH=${CONFIG_PATH}"
+#Below will take the local files as properties. YOu also have to initialise the local path to a git repo with atleast 1 commit.
+#    volumes:
+#      - ./config-server-properties:/config-repo
+    ports:
+      - "8888:8888"
   eureka:
     image: "eureka-service:latest"
     environment:
-      eureka.client.serviceUrl.defaultZone: http://eureka:8761/eureka/
+      - "SPRING_EUREKA=http://eureka:8761/eureka"
+      - "SPRING_CLOUD_CONFIG_URI=${CONFIG_CLIENT_URI}"
     ports:
       - "8761:8761"
   zuul:
     image: "zuul-server:latest"
     environment:
-      eureka.client.serviceUrl.defaultZone: http://eureka:8761/eureka/
+      - "SPRING_EUREKA=http://eureka:8761/eureka"
+      - "SPRING_CLOUD_CONFIG_URI=${CONFIG_CLIENT_URI}"
     ports:
       - "8081:8081"
   product:
     image: "product-service:latest"
     environment:
-      - "JAVA_OPTS=-Djava.security.egd=file:/dev/./urandom -Dspring.profiles.active=dev"
-      - "SPRING_PROFILES_ACTIVE=dev"
+      - "JAVA_OPTS=-Djava.security.egd=file:/dev/./urandom"
+      - "SPRING_PROFILES_ACTIVE=default"
+      - "SPRING_EUREKA=http://eureka:8761/eureka"
+      - "SPRING_CLOUD_CONFIG_URI=${CONFIG_CLIENT_URI}"
     ports:
       - "8090:8090"
   hello:
     image: "hello-service:latest"
     environment:
-      - "JAVA_OPTS=-Djava.security.egd=file:/dev/./urandom -Dspring.profiles.active=dev"
+      - "JAVA_OPTS=-Djava.security.egd=file:/dev/./urandom"
       - "SPRING_PROFILES_ACTIVE=dev"
     ports:
       - "8091:8091"
