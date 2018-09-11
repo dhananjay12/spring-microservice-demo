@@ -38,9 +38,11 @@
 	 <modules>
 	      <module>jwt-resoure-server</module>
 	      <module>product-service</module>
-		  <module>hello-service</module>
+	      <module>config-server</module>
+	      <module>hello-service</module>
 	      <module>eureka-service</module>
 	      <module>zuul-server</module>
+	      <module>cloud-gateway</module>
 	  </modules>
 
 
