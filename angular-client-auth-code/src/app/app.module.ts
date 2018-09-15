@@ -7,13 +7,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from "./app.component";
 import { HomeComponent } from './home/home.component';
 import { ProductsComponent } from "./products/products.component";
+import { WebsocketsComponent } from './websockets/websockets.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    ProductsComponent    
+    ProductsComponent,
+    WebsocketsComponent    
   ],
   imports: [
     BrowserModule,    

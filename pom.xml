@@ -43,6 +43,7 @@
 	      <module>eureka-service</module>
 	      <module>zuul-server</module>
 	      <module>cloud-gateway</module>
+	      <module>websocket-service</module>
 	  </modules>
 
 

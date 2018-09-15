@@ -1,9 +1,10 @@
-<div class="container" >
+<div class="container">
   <button *ngIf="!isLoggedIn" class="btn btn-primary" (click)="login()" type="submit">Login</button>
   <div *ngIf="isLoggedIn" class="content">
-      <span>Welcome !!</span>
-      <a class="btn btn-default pull-right"(click)="logout()" href="#">Logout</a>
-      <br/>
-      <app-products></app-products>
+    <span>Welcome !!</span>
+    <a class="btn btn-default pull-right" (click)="logout()" href="#">Logout</a>
+    <br/>
+    <app-products></app-products>
+    <websockets></websockets>
   </div>
 </div>

@@ -30,7 +30,7 @@ public class SecurityConfig {
                 .httpBasic().disable()
                 .formLogin().disable()
                 .exceptionHandling().and()
-                //.securityMatcher(notMatches("/unsecuredRoutes/**"))
+                .securityMatcher(notMatches("/token/**"))
                 .addFilterAt(oauthAuthenticationWebFilter, SecurityWebFiltersOrder.HTTP_BASIC)
                 .authorizeExchange().anyExchange().authenticated()
                 .and().build();
@@ -40,8 +40,8 @@ public class SecurityConfig {
         return ServerWebExchangeMatchers.pathMatchers(routes);
     }
 
-  /*  private ServerWebExchangeMatcher notMatches(String ... routes) {
+    private ServerWebExchangeMatcher notMatches(String ... routes) {
         return new NegatedServerWebExchangeMatcher(matches(routes));
-    }*/
+    }
     
 }

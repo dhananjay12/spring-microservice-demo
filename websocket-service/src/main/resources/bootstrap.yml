@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: websocket-service
+  cloud:
+    config:
+      uri: ${SPRING_CLOUD_CONFIG_URI:http://localhost:8888}

@@ -62,8 +62,15 @@ services:
       - "SPRING_CLOUD_CONFIG_URI=${CONFIG_CLIENT_URI}"
     ports:
       - "8761:8761"
-  zuul:
-    image: "zuul-server:latest"
+#  zuul:
+#    image: "zuul-server:latest"
+#    environment:
+#      - "SPRING_EUREKA=http://eureka:8761/eureka"
+#      - "SPRING_CLOUD_CONFIG_URI=${CONFIG_CLIENT_URI}"
+#    ports:
+#      - "8081:8081"
+  gateway:
+    image: "cloud-gateway:latest"
     environment:
       - "SPRING_EUREKA=http://eureka:8761/eureka"
       - "SPRING_CLOUD_CONFIG_URI=${CONFIG_CLIENT_URI}"
@@ -78,6 +85,15 @@ services:
       - "SPRING_CLOUD_CONFIG_URI=${CONFIG_CLIENT_URI}"
     ports:
       - "8090:8090"
+  websocket:
+    image: "websocket-service:latest"
+    environment:
+      - "JAVA_OPTS=-Djava.security.egd=file:/dev/./urandom"
+      - "SPRING_PROFILES_ACTIVE=default"
+      - "SPRING_EUREKA=http://eureka:8761/eureka"
+      - "SPRING_CLOUD_CONFIG_URI=${CONFIG_CLIENT_URI}"
+    ports:
+      - "8091:8091"
   hello:
     image: "hello-service:latest"
     environment:
