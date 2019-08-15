@@ -1,0 +1,33 @@
+server:
+  port: 8050
+  
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          lowerCaseServiceId: true
+          enabled: true
+      routes:
+        - id: websocket-sockjs-route
+          uri: http://websocketservice
+          predicates:
+            - Path=/websocketservice/info/**
+        - id: websocket_route
+          uri: lb:ws://websocketservice
+          predicates:
+            - Path=/websocketservice/**
+logging:
+  level:
+    root: DEBUG
+    org.springframework.gateway: TRACE
+    org.springframework.cloud.gateway: TRACE
+    org.springframework.cloud.loadbalancer: TRACE
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+

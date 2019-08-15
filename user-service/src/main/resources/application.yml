@@ -1,0 +1,8 @@
+server:
+  port: 8100
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
