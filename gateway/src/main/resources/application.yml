@@ -14,7 +14,7 @@ spring:
           predicates:
             - Path=/websocketservice/info/**
         - id: websocket_route
-          uri: lb:ws://websocketservice
+          uri: ws://websocketservice
           predicates:
             - Path=/websocketservice/**
 logging:

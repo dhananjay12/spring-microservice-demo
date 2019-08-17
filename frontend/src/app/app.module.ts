@@ -12,6 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RestService } from './services/rest.service';
 import { WebsocketService } from './services/websocket.service';
 import { ReactiveService } from './services/reactive.service';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { ReactiveService } from './services/reactive.service';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
     HttpClientModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent },

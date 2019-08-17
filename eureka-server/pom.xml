@@ -58,7 +58,7 @@
 							<images>
 								<image>
 									<alias>${project.artifactId}</alias>
-									<name>poc-${project.artifactId}</name>
+									<name>dhananjay12/poc-${project.artifactId}</name>
 									<build>
 										<from>java:8-jre-alpine</from>
 										<!--<tags> <tag>${project.version}</tag> </tags> -->
@@ -83,7 +83,7 @@
 								<phase>post-integration-test</phase>
 								<goals>
 									<goal>build</goal>
-									<!--<goal>push</goal>-->
+									<goal>push</goal>
 								</goals>
 							</execution>
 						</executions>

@@ -19,7 +19,7 @@ export class RestService {
     );
 
     return this.httpClient
-      .get("/user-service/users/getPublicMailingAddress", {
+      .get("/api/user-service/users/getPublicMailingAddress", {
         headers,
         responseType: "text"
       })
@@ -32,7 +32,7 @@ export class RestService {
     );
 
     return this.httpClient
-      .get("/contact-us-service/contactUs/address", {
+      .get("/api/contact-us-service/contactUs/address", {
         headers,
         responseType: "text"
       })
