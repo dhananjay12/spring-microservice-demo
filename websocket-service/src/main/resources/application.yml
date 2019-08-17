@@ -1,7 +1,5 @@
 server:
   port: 8400
-  servlet:
-    context-path: /websocketservice
 
 management:
   endpoints:

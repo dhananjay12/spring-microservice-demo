@@ -8,7 +8,7 @@
 	<description>Demo project for Spring Boot</description>
 	<parent>
 		<groupId>com.mynotes.poc</groupId>
-		<artifactId>microservice-all</artifactId>
+		<artifactId>microservice-poc</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 		<relativePath />
 	</parent>

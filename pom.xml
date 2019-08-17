@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.mynotes.poc</groupId>
-	<artifactId>microservice-all</artifactId>
+	<artifactId>microservice-poc</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 

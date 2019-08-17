@@ -23,7 +23,7 @@ public class GreetReactiveController {
 	public Publisher<Greeting> sseGreetings() {
 		Flux<Greeting> delayElements = Flux
 				.<Greeting>generate(sink -> sink.next(new Greeting("Hello @" + Instant.now().toString())))
-				.delayElements(Duration.ofSeconds(1));
+				.delayElements(Duration.ofSeconds(5));
 		return delayElements;
 	}
 
