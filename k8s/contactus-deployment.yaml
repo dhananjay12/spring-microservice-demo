@@ -1,0 +1,34 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    run: contact-us-service
+  name: contact-us-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: contact-us-service
+      component: contact-us-service
+  template:
+    metadata:
+      labels:
+        run: contact-us-service
+        component: contact-us-service
+    spec:
+      containers:
+      - env:
+        - name: JAVA_OPTS
+          value: -Djava.security.egd=file:/dev/./urandom
+        - name: SPRING_PROFILES_ACTIVE
+          value: default,k8
+        image: dhananjay12/poc-contact-us-service:latest
+        name: contact-us-service
+        resources:
+          requests:
+            memory: "256Mi"
+          limits:
+            memory: "512Mi"
+        ports:
+        - containerPort: 8200
+          protocol: TCP

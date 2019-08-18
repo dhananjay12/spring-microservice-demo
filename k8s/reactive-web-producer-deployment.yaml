@@ -1,0 +1,34 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    run: reactive-web-producer
+  name: reactive-web-producer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: reactive-web-producer
+      component: reactive-web-producer
+  template:
+    metadata:
+      labels:
+        run: reactive-web-producer
+        component: reactive-web-producer
+    spec:
+      containers:
+      - env:
+        - name: JAVA_OPTS
+          value: -Djava.security.egd=file:/dev/./urandom
+        - name: SPRING_PROFILES_ACTIVE
+          value: default,k8
+        image: dhananjay12/poc-reactive-web-producer:latest
+        name: reactive-web-producer
+        resources:
+          requests:
+            memory: "256Mi"
+          limits:
+            memory: "512Mi"
+        ports:
+        - containerPort: 8300
+          protocol: TCP

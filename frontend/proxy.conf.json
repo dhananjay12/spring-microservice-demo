@@ -1,6 +1,7 @@
 {
-  "/api": {
-    "target": "http://localhost:8050",
+  
+  "/apilocal": {
+    "target": "http://localhost:8050/",
     "secure": false,
     "changeOrigin": true,
     "logLevel": "debug",

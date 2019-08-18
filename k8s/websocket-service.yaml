@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    run: websocketservice
+  name: websocketservice
+spec:
+  type: NodePort
+  selector:
+    component: websocketservice
+    run: websocketservice
+  ports:
+  - port: 8400
+    targetPort: 8400
+    protocol: TCP
