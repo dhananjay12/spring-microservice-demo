@@ -1,12 +1,8 @@
 {
-  
-  "/apilocal": {
-    "target": "http://localhost:8050/",
+  "/api": {
+    "target": "https://35.222.118.244/",
     "secure": false,
     "changeOrigin": true,
-    "logLevel": "debug",
-    "pathRewrite": {
-      "^/api": ""
-    }
+    "logLevel": "debug"
   }
 }
