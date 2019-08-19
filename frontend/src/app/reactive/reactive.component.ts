@@ -17,5 +17,4 @@ export class ReactiveComponent implements OnInit {
     this.service.getSSE().subscribe(response => {this.values.push(response.data)})    
   }
 
-
 }

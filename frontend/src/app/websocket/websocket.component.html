@@ -7,15 +7,20 @@
     <div class="col-md-6">
       <form class="form-inline">
         <div class="form-group">
-          <label for="connect">WebSocket connection:</label>
-          <button (click)="connect()" class="btn btn-default" type="submit">
+          <label for="connect">WebSocket connection :</label>
+          <button
+            (click)="connect()"
+            class="btn btn-default"
+            type="submit"
+            [disabled]="buttonDisabled"
+          >
             Connect
           </button>
           <button
             (click)="disconnect()"
             class="btn btn-default"
             type="submit"
-            disabled="disabled"
+            [disabled]="!buttonDisabled"
           >
             Disconnect
           </button>
@@ -41,17 +46,17 @@
     </div>
   </div>
   <div class="row">
-        <div class="col-md-12">
-          <table id="conversation" class="table table-striped">
-            <thead>
-              <tr>
-                <th>Greetings</th>
-              </tr>
-            </thead>
-            <tbody id="greetings"></tbody>
-          </table>
-        </div>
-      </div>
+    <div class="col-md-12">
+      <table id="conversation" class="table table-striped">
+        <thead>
+          <tr>
+            <th>Greetings</th>
+          </tr>
+        </thead>
+        <tbody id="greetings">
+          <div *ngFor="let value of greetings">{{ value }}</div>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
-
-

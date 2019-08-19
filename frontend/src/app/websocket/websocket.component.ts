@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { WebSocketAPI } from './websocket.api';
+import * as Stomp from 'stompjs';
+import * as SockJS from 'sockjs-client';
 
 @Component({
   selector: 'app-websocket',
@@ -8,30 +9,52 @@ import { WebSocketAPI } from './websocket.api';
 })
 export class WebsocketComponent implements OnInit {
 
-  title = 'angular8-springboot-websocket';
-
-  webSocketAPI: WebSocketAPI;
-  greeting: any;
+  greetings: Array<any> = [];
   name: string;
-  ngOnInit() {
-    this.webSocketAPI = new WebSocketAPI(new WebsocketComponent());
+  webSocketEndPoint: string = '/api/websocketservice/gs-guide-websocket';
+  topic: string = "/topic/greetings";
+  stompClient: any;
+  buttonDisabled: boolean = false;
+  ngOnInit() {    
   }
 
   connect(){
-    this.webSocketAPI._connect();
+    this.buttonDisabled=true;
+   let ws = new SockJS(this.webSocketEndPoint);
+        this.stompClient = Stomp.over(ws);
+        const _this = this;        
+        _this.stompClient.connect({}, function (frame) {
+            _this.stompClient.subscribe(_this.topic, function (sdkEvent) {
+                _this.handleMessage(sdkEvent);
+            });
+            //_this.stompClient.reconnect_delay = 2000;
+        }, this.errorCallBack);
   }
 
   disconnect(){
-    this.webSocketAPI._disconnect();
+   // this.webSocketAPI._disconnect();
+   if (this.stompClient !== null) {
+    this.stompClient.disconnect();
+    this.buttonDisabled=false;
+    }
   }
 
   sendMessage(){
-    this.webSocketAPI._send(this.name);
+    //this.webSocketAPI._send(this.name);
+    console.log("calling logout api via web socket");
+    this.stompClient.send("/app/hello", {}, JSON.stringify(this.name));
   }
 
   handleMessage(message){
-    console.log(message);
-    this.greeting = message.content;
+    this.greetings.push(JSON.parse(message.body).content);
+  }
+
+  // on error, schedule a reconnection attempt
+  errorCallBack(error) {
+      console.log("errorCallBack -> " + error)
+      setTimeout(() => {
+          this.connect();
+      }, 5000);
   }
 
 }
