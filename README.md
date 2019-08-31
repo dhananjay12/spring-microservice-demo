@@ -87,6 +87,6 @@ If calling via gateway then - `/websocketservice/gs-guide-websocket`
 ## Profiles
 Each backend project has both `eureka-client` and `spring-cloud-kubernetes` jars. 
 
-If run by `classical` profile, it expects Eureka server to be present.
+If run by `traditional` profile, it expects Eureka server to be present.
 
 When running on Kubernetes, each service is inside a "Deployment" and exposed via "Service". Therefore, we don't need Eureka as a service discovery mechanism and we can use the services list inside K8 itself. So run with `k8` profile.

@@ -1,4 +1,4 @@
-package com.mynotes.spring.cloud.eureka;
+package com.mynotes.spring.cloud;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

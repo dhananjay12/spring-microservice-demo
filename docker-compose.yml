@@ -10,7 +10,7 @@ services:
     image: "poc-gateway:latest"
     environment:
       - "JAVA_OPTS=-Djava.security.egd=file:/dev/./urandom"
-      - "SPRING_PROFILES_ACTIVE=default,classical"
+      - "SPRING_PROFILES_ACTIVE=default,traditional"
       - "SPRING_EUREKA=http://eureka:8761/eureka"
     ports:
       - "8050:8050"
@@ -18,7 +18,7 @@ services:
     image: "poc-user-service:latest"
     environment:
       - "JAVA_OPTS=-Djava.security.egd=file:/dev/./urandom"
-      - "SPRING_PROFILES_ACTIVE=default,classical"
+      - "SPRING_PROFILES_ACTIVE=default,traditional"
       - "SPRING_EUREKA=http://eureka:8761/eureka"
     ports:
       - "8100:8100"
@@ -26,7 +26,7 @@ services:
     image: "poc-contact-us-service:latest"
     environment:
       - "JAVA_OPTS=-Djava.security.egd=file:/dev/./urandom"
-      - "SPRING_PROFILES_ACTIVE=default,classical"
+      - "SPRING_PROFILES_ACTIVE=default,traditional"
       - "SPRING_EUREKA=http://eureka:8761/eureka"
     ports:
       - "8200:8200"
@@ -34,7 +34,7 @@ services:
     image: "poc-reactive-web-producer:latest"
     environment:
       - "JAVA_OPTS=-Djava.security.egd=file:/dev/./urandom"
-      - "SPRING_PROFILES_ACTIVE=default,classical"
+      - "SPRING_PROFILES_ACTIVE=default,traditional"
       - "SPRING_EUREKA=http://eureka:8761/eureka"
     ports:
       - "8300:8300"
@@ -42,7 +42,7 @@ services:
     image: "poc-websocket-service:latest"
     environment:
       - "JAVA_OPTS=-Djava.security.egd=file:/dev/./urandom"
-      - "SPRING_PROFILES_ACTIVE=default,classical"
+      - "SPRING_PROFILES_ACTIVE=default,traditional"
       - "SPRING_EUREKA=http://eureka:8761/eureka"
     ports:
       - "8400:8400"
