@@ -1,8 +1,9 @@
 {
   "/api": {
-    "target": "https://35.222.118.244/",
+    "target": "http://localhost:8050/",
     "secure": false,
     "changeOrigin": true,
-    "logLevel": "debug"
+    "logLevel": "debug",
+    "pathRewrite": {"^/api" : ""}
   }
 }

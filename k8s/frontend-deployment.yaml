@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: dhananjay12/poc-frontend
+          image: poc-frontend
           ports:
             - containerPort: 80
           imagePullPolicy: Always

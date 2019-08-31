@@ -1,20 +1,59 @@
 # Demo
-This project is a POC for microservices which has different flavours of bckend written in **REST**, **Reactive** and **Websockets**. The frotnend is written in **Angular 8**.
+This project is a POC for microservices which has different flavours of backend written in **REST**, **Reactive** and **Websockets**. The frotnend is written in **Angular 8**.
 
 The project can be run using docker-compose or deployed in Kubernetes.
 
-## Build Backend
+## How To Run Locally
+
+### Build and Run Backend
 To build docker images for backend run following command:
 ```sh
 mvn clean install -Ddocker
 ```
-## Build Frontend
+
+Now, just run all the service using docker-compose:
+
+```sh
+docker-compose up -d
+```
+
+### Build and Run Frontend
+
+Go to frontend folder and run 
+
+```sh
+npm install
+```
+
+Then to start run
+
+```sh
+npm run start
+```
+
+## How To Run on Kubernetes
+
+### Build Docker Images
+
+To build docker images for backend run following command:
+```sh
+mvn clean install -Ddocker
+```
+
+### Build Frontend Image
 
 To build docker image for frontend, run the following command inside `frontend` folder.
 ```sh
 docker build -t poc-frontend .
 ```
-Note- Whatever image names you give, change in the `k8s` nd `docker-compose.yml` accordingly.
+
+**Note** :- Whatever image `prefix` name you give, change in the `k8s` accordingly.
+
+### Run on K8
+
+```
+kubectl apply -f k8s
+```
 
 ## Endpoints
 

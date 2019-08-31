@@ -22,7 +22,7 @@ spec:
           value: -Djava.security.egd=file:/dev/./urandom
         - name: SPRING_PROFILES_ACTIVE
           value: default,k8
-        image: dhananjay12/poc-gateway:latest
+        image: poc-gateway:latest
         name: gateway
         resources:
           requests:

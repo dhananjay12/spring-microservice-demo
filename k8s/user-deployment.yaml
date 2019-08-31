@@ -22,7 +22,7 @@ spec:
           value: -Djava.security.egd=file:/dev/./urandom
         - name: SPRING_PROFILES_ACTIVE
           value: default,k8
-        image: dhananjay12/fungible-user-service:latest
+        image: fungible-user-service:latest
         name: user-service
         resources:
           requests:
