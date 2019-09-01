@@ -7,17 +7,41 @@
         <div class="col-sm-6">
           <div class="card text-center text-white bg-success mb-3">
             <div class="card-body">
-              <h3 class="card-title">User Service Result</h3> 
+              <h3 class="card-title">User Service Results</h3>
+              <h5 class="card-title blue">1- GET /address/company</h5>
+              <h5 class="card-title" [ngStyle]="{'font-weight': 'bold'}">Response:</h5>
               <p class="card-text">{{userResult}}</p>
+              <hr/>
+              <h5 class="card-title blue" >{{"2- GET /users/{id}"}}</h5>              
+              <input #idValue placeholder="{id}">
+              <button (click)="getUser(idValue.value)" class="btn btn-primary">Submit</button>
+              <h5 class="card-title" [ngStyle]="{'font-weight': 'bold'}">Response:</h5>
+              <p class="card-text">{{userResultObj | json}}</p>
+              <hr/>
+              <h5 class="card-title blue" >{{"3- GET /users/multiple"}}</h5>
+              <input #idsValue placeholder="?ids=1,2">              
+              <button (click)="getUsers(idsValue.value)" class="btn btn-primary">Submit</button>
+              <h5 class="card-title" [ngStyle]="{'font-weight': 'bold'}">Response:</h5>
+              <p class="card-text">{{userResultArr | json}}</p>
+              <hr/>
+              <h5 class="card-title blue" >{{"4- GET /headers"}}</h5>              
+              <input #headerKey placeholder="HeaderKey" >
+              <input #headerValue placeholder="HeaderValue" >              
+              <button (click)="sendHeader(headerKey.value,headerValue.value)" class="btn btn-primary">Submit</button>
+              <h5 class="card-title" [ngStyle]="{'font-weight': 'bold'}">Request headers to Downstream Service  :</h5>
+              <div *ngFor="let item of headerResult| keyvalue">
+                  <span [ngStyle]="{'font-weight': 'bold'}">{{ item.key }}</span> :: {{ item.value }}                  
+                </div>
             </div>
           </div>
         </div>
         <div class="col-sm-6">
           <div class="card text-center text-white bg-info mb-3">
-            <div class="card-body">
-              <h3 class="card-title">Contact Us Service Result</h3>
-              <p class="card-text">{{contactUsResult}}</p>
-            </div>
+              <div class="card-body">
+                  <h3 class="card-title">Contact Us Service Result</h3>
+                  <h5 class="card-title blue">1- GET /contactUs/address</h5>
+                  <h5 class="card-title">Response:</h5>
+                  <p class="card-text">{{contactUsResult}}</p>
           </div>
         </div>       
       </div>

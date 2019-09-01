@@ -39,17 +39,17 @@ public class UserServiceRestController {
 	}
 
 	@GetMapping(value = "/multiple")
-	public ResponseEntity<?> getUsers(@RequestParam Integer[] ids) {
+	public ResponseEntity<?> getUsers(@RequestParam("ids") List<Integer> ids) {
 
-		for (int i= 0 ; i<ids.length; i++){
-			log.info("Passed ids -> " + ids[i]);
+		for (int i= 0 ; i<ids.size(); i++){
+			log.info("Passed ids -> " + ids.get(i));
 		}
 
 		List<User> result =new ArrayList<>();
 
-		for (int i= 0 ; i<ids.length; i++){
+		for (int i= 0 ; i<ids.size(); i++){
 			for(int j=0; j< userList.size(); j++){
-				if(ids[i].equals(userList.get(j).getId())){
+				if(ids.get(i).equals(userList.get(j).getId())){
 					result.add(userList.get(j));
 					break;
 				}
@@ -60,19 +60,12 @@ public class UserServiceRestController {
 	}
 
 	@GetMapping("/headers")
-	public ResponseEntity<String> multiValue(@RequestHeader MultiValueMap<String, String> headers) {
+	public ResponseEntity<?> multiValue(@RequestHeader MultiValueMap<String, String> headers) {
 		headers.forEach((key, value) -> {
 			log.info(String.format("Header '%s' = %s", key, value.stream().collect(Collectors.joining("|"))));
 		});
 
-		return new ResponseEntity<String>(String.format("Listed %d headers", headers.size()), HttpStatus.OK);
-	}
-	
-	@RequestMapping(value = "/getPublicMailingAddress", method = RequestMethod.GET)
-	@ResponseBody
-	public String getContact() {
-		return "Public mail Address";
-
+		return ResponseEntity.ok(headers);
 	}
 
 	private User findUser(int id) {

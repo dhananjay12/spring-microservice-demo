@@ -32,7 +32,7 @@ public class ContactUsController {
     @ResponseBody
     public String getContactUsDetails() {
 
-       String result = rest.getForObject("http://user-service/users/getPublicMailingAddress", String.class);
+       String result = rest.getForObject("http://user-service/address/company", String.class);
 
        return "Contact Address ==> " + result;
     }
