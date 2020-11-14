@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    run: contact-us-service
+  name: contact-us-service
+spec:
+  type: NodePort
+  selector:
+    component: contact-us-service
+    run: contact-us-service
+  ports:
+  - port: 8200
+    targetPort: 8200
+    protocol: TCP
