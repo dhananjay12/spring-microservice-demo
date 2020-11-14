@@ -1,0 +1,39 @@
+server:
+  port: 8081
+
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+      - id: token
+        uri: http://localhost:8082/auth/realms/master/protocol/openid-connect/token
+        predicates:
+        - Path=/token/**
+      - id: product-service
+        uri: lb://product-service
+        predicates:
+        - Path=/product/**
+        filters:
+        - RewritePath=/product/(?<path>.*), /$\{path}
+      - id: websocket-service
+        uri: lb://websocket-service
+        predicates:
+        - Path=/ws/**
+
+security:
+  oauth2:
+    client:
+      # From OIDC app
+      clientId: frontend
+      clientSecret: b4710f0c-d552-45a7-b2ad-7b8caf3455ac
+      # From Authorization Server's metadata
+      accessTokenUri: http://localhost:8082/auth/realms/master/protocol/openid-connect/token
+      userAuthorizationUri: http://localhost:8082/auth/realms/master/protocol/openid-connect/auth
+      clientAuthenticationScheme: form
+    resource:
+       # from your Auth Server's metadata, check .well-known/openid-configuration
+      userInfoUri: http://localhost:8082/auth/realms/master/protocol/openid-connect/userinfo
+      preferTokenInfo: false
