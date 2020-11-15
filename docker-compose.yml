@@ -1,77 +1,43 @@
-version: "3"
+version: "3.7"
+
+x-common-variables: &common-variables
+  eureka.client.serviceUrl.defaultZone: http://eureka:8080/eureka
+  eureka.instance.non-secure-port: 8080
+
 services:
   eureka:
-    image: "poc-eureka-server:latest"
+    image: "dhananjay12/demo-eureka-server:latest"
     environment:
-      - "SPRING_EUREKA=http://eureka:8761/eureka"
+      <<: *common-variables
     ports:
-      - "8761:8761"
+      - "8761:8080"
   gateway:
-    image: "poc-gateway:latest"
+    image: "dhananjay12/demo-gateway:latest"
     environment:
-      - "JAVA_OPTS=-Djava.security.egd=file:/dev/./urandom"
-      - "SPRING_PROFILES_ACTIVE=default,traditional"
-      - "SPRING_EUREKA=http://eureka:8761/eureka"
+      <<: *common-variables
     ports:
-      - "8050:8050"
-  user:
-    image: "poc-user-service:latest"
+      - "8080:8080"
+  service-one:
+    image: "dhananjay12/demo-service-one:latest"
     environment:
-      - "JAVA_OPTS=-Djava.security.egd=file:/dev/./urandom"
-      - "SPRING_PROFILES_ACTIVE=default,traditional"
-      - "SPRING_EUREKA=http://eureka:8761/eureka"
+      <<: *common-variables
     ports:
-      - "8100:8100"
-  contactus:
-    image: "poc-contact-us-service:latest"
+      - "8100:8080"
+  service-two:
+    image: "dhananjay12/demo-service-two:latest"
     environment:
-      - "JAVA_OPTS=-Djava.security.egd=file:/dev/./urandom"
-      - "SPRING_PROFILES_ACTIVE=default,traditional"
-      - "SPRING_EUREKA=http://eureka:8761/eureka"
+      <<: *common-variables
     ports:
-      - "8200:8200"
-  reactive:
-    image: "poc-reactive-web-producer:latest"
+      - "8200:8080"
+  reactive-service:
+    image: "dhananjay12/demo-reactive-service:latest"
     environment:
-      - "JAVA_OPTS=-Djava.security.egd=file:/dev/./urandom"
-      - "SPRING_PROFILES_ACTIVE=default,traditional"
-      - "SPRING_EUREKA=http://eureka:8761/eureka"
+      <<: *common-variables
     ports:
-      - "8300:8300"
-  websocket:
-    image: "poc-websocket-service:latest"
+      - "8300:8080"
+  websocket-service:
+    image: "dhananjay12/demo-websocket-service:latest"
     environment:
-      - "JAVA_OPTS=-Djava.security.egd=file:/dev/./urandom"
-      - "SPRING_PROFILES_ACTIVE=default,traditional"
-      - "SPRING_EUREKA=http://eureka:8761/eureka"
+      <<: *common-variables
     ports:
-      - "8400:8400"
-  keycloak:
-    image: jboss/keycloak
-    environment:
-      DB_VENDOR: MYSQL
-      DB_ADDR: mariadb
-      DB_DATABASE: keycloak
-      DB_USER: keycloak
-      DB_PASSWORD: password
-      KEYCLOAK_USER: admin
-      KEYCLOAK_PASSWORD: admin
-    ports:
-      - 8888:8080
-    depends_on:
-      - mariadb
-  mariadb:
-    image: mariadb:10.4.7
-    volumes:
-      - mariadb_data:/var/lib/mariadb
-    ports:
-      - 3306:3306
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: keycloak
-      MYSQL_USER: keycloak
-      MYSQL_PASSWORD: password
-
-volumes:
-  mariadb_data:
-    driver: local
+      - "8400:8080"

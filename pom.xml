@@ -4,49 +4,20 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.mynotes.poc</groupId>
-	<artifactId>microservice-poc</artifactId>
+	<groupId>com.mynotes.microservices.demo</groupId>
+	<artifactId>spring-microservice-demo-root</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
-	<name>new-edge-root</name>
+	<name>spring-microservice-demo</name>
 	<description>Demo project for spring microservices k8s</description>
-
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.1.7.RELEASE</version>
-		<relativePath /> <!-- lookup parent from repository -->
-	</parent>
-
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<java.version>1.8</java.version>
-		<io.springfox.springfox.version>2.9.2</io.springfox.springfox.version>
-		<io.fabric8.docker.version>0.26.0</io.fabric8.docker.version>
-		<spring-cloud.version>Greenwich.SR2</spring-cloud.version>
-	</properties>	
-
-	<dependencyManagement>
-	  <dependencies>
-			<dependency>
-				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-dependencies</artifactId>
-				<version>${spring-cloud.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
-
 
 	<modules>
 		<module>eureka-server</module>
-		<module>contact-us-service</module>
-		<module>user-service</module>
+		<module>service-one</module>
+		<module>service-two</module>
 		<module>gateway</module>
-		<module>reactive-web-producer</module>
+		<module>reactive-service</module>
 		<module>websocket-service</module>
 	</modules>
     

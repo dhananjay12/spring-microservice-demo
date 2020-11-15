@@ -1,6 +1,3 @@
-server:
-  port: 8050
-  
 spring:
   cloud:
     gateway:
@@ -8,6 +5,15 @@ spring:
         locator:
           lowerCaseServiceId: true
           enabled: true
+          predicates:
+            - name: Path
+              args:
+                pattern: "'/api/'+serviceId.toLowerCase()+'/**'"
+            filters:
+              - name: RewritePath
+                args:
+                  regexp: "'/api/' + serviceId.toLowerCase() + '/(?<remaining>.*)'"
+                  replacement: "'/${remaining}'"
       routes:
         - id: websocket-sockjs-route
           uri: http://websocketservice
@@ -17,13 +23,12 @@ spring:
           uri: ws://websocketservice
           predicates:
             - Path=/websocketservice/**
-logging:
-  level:
-    root: DEBUG
-    org.springframework.gateway: TRACE
-    org.springframework.cloud.gateway: TRACE
-    org.springframework.cloud.loadbalancer: TRACE
-
+    kubernetes:
+      enabled: false
+      loadbalancer:
+        enabled: false
+      reload:
+        enabled: false
 
 management:
   endpoints:
@@ -31,3 +36,8 @@ management:
       exposure:
         include: '*'
 
+eureka:
+  client:
+    enabled: true
+    serviceUrl:
+      defaultZone: http://localhost:8080/eureka/

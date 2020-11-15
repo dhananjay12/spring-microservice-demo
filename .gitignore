@@ -6,7 +6,7 @@
 /.sts4-cache
 .attach_pid*
 .idea/
-
+**/target/**
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 

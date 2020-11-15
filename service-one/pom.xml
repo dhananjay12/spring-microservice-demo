@@ -2,12 +2,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-
   <groupId>com.mynotes.microservices.demo</groupId>
-  <artifactId>eureka-server</artifactId>
-  <name>eureka-server</name>
+  <artifactId>service-one</artifactId>
   <packaging>jar</packaging>
-  <description>Demo project for Spring Cloud eureka</description>
+  <name>service-one</name>
+  <description>Demo project for Spring</description>
 
   <parent>
     <groupId>org.springframework.boot</groupId>
@@ -15,17 +14,6 @@
     <version>2.3.6.RELEASE</version>
     <relativePath/> <!-- lookup parent from repository -->
   </parent>
-
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <java.version>11</java.version>
-    <spring-cloud.version>Hoxton.SR9</spring-cloud.version>
-    <skip.integration.tests>false</skip.integration.tests>
-    <skip.unit.tests>false</skip.unit.tests>
-    <docker.image.url>dhananjay12</docker.image.url>
-    <docker.image.prefix>demo</docker.image.prefix>
-  </properties>
 
   <dependencyManagement>
     <dependencies>
@@ -39,10 +27,65 @@
     </dependencies>
   </dependencyManagement>
 
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <java.version>11</java.version>
+    <spring-cloud.version>Hoxton.SR9</spring-cloud.version>
+    <skip.integration.tests>false</skip.integration.tests>
+    <skip.unit.tests>false</skip.unit.tests>
+    <docker.image.url>dhananjay12</docker.image.url>
+    <docker.image.prefix>demo</docker.image.prefix>
+  </properties>
+
+
   <dependencies>
     <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    <dependency>
       <groupId>org.springframework.cloud</groupId>
-      <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+      <artifactId>spring-cloud-starter-sleuth</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-actuator</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.micrometer</groupId>
+      <artifactId>micrometer-registry-prometheus</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-kubernetes</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-loadbalancer</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+      <exclusions>
+        <exclusion>
+          <groupId>org.springframework.cloud</groupId>
+          <artifactId>spring-cloud-starter-netflix-archaius</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.springframework.cloud</groupId>
+          <artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>com.netflix.ribbon</groupId>
+          <artifactId>ribbon-eureka</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <optional>true</optional>
     </dependency>
   </dependencies>
 
@@ -121,7 +164,7 @@
           <container>
             <creationTime>${git.commit.time}</creationTime>
             <filesModificationTime>${git.commit.time}</filesModificationTime>
-            <mainClass>com.mynotes.microservices.demo.eureka.EurekaServerApplication</mainClass>
+            <mainClass>com.mynotes.microservices.demo.serviceone.ServiceOneApplication</mainClass>
             <ports>
               <port>8080</port>
             </ports>

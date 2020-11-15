@@ -1,33 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.mynotes.microservices.demo</groupId>
-  <artifactId>eureka-server</artifactId>
-  <name>eureka-server</name>
-  <packaging>jar</packaging>
-  <description>Demo project for Spring Cloud eureka</description>
+	<groupId>com.mynotes.microservices.demo</groupId>
+	<artifactId>service-two</artifactId>
+	<name>service-two</name>
+	<packaging>jar</packaging>
+	<description>Demo project for Spring</description>
 
-  <parent>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-parent</artifactId>
-    <version>2.3.6.RELEASE</version>
-    <relativePath/> <!-- lookup parent from repository -->
-  </parent>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.3.6.RELEASE</version>
+		<relativePath /> <!-- lookup parent from repository -->
+	</parent>
 
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <java.version>11</java.version>
-    <spring-cloud.version>Hoxton.SR9</spring-cloud.version>
-    <skip.integration.tests>false</skip.integration.tests>
-    <skip.unit.tests>false</skip.unit.tests>
-    <docker.image.url>dhananjay12</docker.image.url>
-    <docker.image.prefix>demo</docker.image.prefix>
-  </properties>
-
-  <dependencyManagement>
+	<dependencyManagement>
     <dependencies>
       <dependency>
         <groupId>org.springframework.cloud</groupId>
@@ -39,14 +28,69 @@
     </dependencies>
   </dependencyManagement>
 
-  <dependencies>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>11</java.version>
+		<spring-cloud.version>Hoxton.SR9</spring-cloud.version>
+    <skip.integration.tests>false</skip.integration.tests>
+    <skip.unit.tests>false</skip.unit.tests>
+		<docker.image.url>dhananjay12</docker.image.url>
+    <docker.image.prefix>demo</docker.image.prefix>
+	</properties>
+
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-sleuth</artifactId>
+    </dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.micrometer</groupId>
+			<artifactId>micrometer-registry-prometheus</artifactId>
+		</dependency>
+		 <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-kubernetes</artifactId>
+    </dependency>
     <dependency>
       <groupId>org.springframework.cloud</groupId>
-      <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+      <artifactId>spring-cloud-starter-loadbalancer</artifactId>
     </dependency>
-  </dependencies>
+    <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+      <exclusions>
+        <exclusion>
+          <groupId>org.springframework.cloud</groupId>
+          <artifactId>spring-cloud-starter-netflix-archaius</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.springframework.cloud</groupId>
+          <artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>com.netflix.ribbon</groupId>
+          <artifactId>ribbon-eureka</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+		<dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <optional>true</optional>
+    </dependency>
+	</dependencies>
 
-  <build>
+	<build>
     <finalName>${project.artifactId}</finalName>
     <plugins>
       <plugin>
@@ -55,8 +99,7 @@
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-plugin
-        </artifactId> <!--is designed for running unit tests and if any of the tests fail then it will fail the build immediately.-->
+        <artifactId>maven-surefire-plugin</artifactId> <!--is designed for running unit tests and if any of the tests fail then it will fail the build immediately.-->
         <configuration>
           <!-- Sets the VM argument line used when unit tests are run. -->
           <argLine>${surefireArgLine}</argLine>
@@ -71,8 +114,7 @@
 
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-failsafe-plugin
-        </artifactId> <!-- is designed for running integration tests, and decouples failing the build if there are test failures from actually running the tests.-->
+        <artifactId>maven-failsafe-plugin</artifactId> <!-- is designed for running integration tests, and decouples failing the build if there are test failures from actually running the tests.-->
         <configuration>
           <!-- Sets the VM argument line used when integration tests are run. -->
           <argLine>${failsafeArgLine}</argLine>
@@ -121,7 +163,7 @@
           <container>
             <creationTime>${git.commit.time}</creationTime>
             <filesModificationTime>${git.commit.time}</filesModificationTime>
-            <mainClass>com.mynotes.microservices.demo.eureka.EurekaServerApplication</mainClass>
+            <mainClass>com.mynotes.microservices.demo.servicetwo.ServiceTwoApplication</mainClass>
             <ports>
               <port>8080</port>
             </ports>

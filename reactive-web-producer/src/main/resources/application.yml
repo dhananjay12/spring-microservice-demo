@@ -1,8 +1,0 @@
-server:
-  port: 8300
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: '*'

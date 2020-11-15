@@ -18,7 +18,7 @@ export class ReactiveService {
   getSSE() {
     return Observable.create(observer => {
       const eventSource = this.sseService.getEventSource(
-        "/api/reactive-web-producer/greetings/sse"
+        "/api/reactive-service/greetings/sse"
       );
 
       eventSource.onmessage = event => {
