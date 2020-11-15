@@ -68,7 +68,7 @@ If calling via gateway then - `/api/service-one/hello`
 
 `/hop/{status}` internally calls `service-two` `/status/{status}` endpoint and the response will be that code.
 
-### Contact Us Service (REST)
+### Service Two (REST)
 
 **Endpoint** - `/hello` and `/status/{status}`
 
