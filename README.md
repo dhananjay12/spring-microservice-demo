@@ -8,7 +8,7 @@ The project can be run using docker-compose or deployed in Kubernetes.
 ### Build and Run Backend
 To build docker images for backend run following command:
 ```sh
-mvn clean install -Ddocker
+mvn clean install 
 ```
 
 Now, just run all the service using docker-compose:
