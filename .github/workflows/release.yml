@@ -22,7 +22,5 @@ jobs:
       - run: mvn clean install
 
       - name: Build Images using JIB
-        run: mvn -pl eureka-server,service-one,service-two,reactive-service,websocket-service,gateway \
-          -Dskip.unit.tests=true -Dskip.integration.tests=true package jib:build \
-          -Djib.to.auth.username=${{ secrets.DOCKERHUB_PASSWORD }} -Djib.to.auth.password=${{ secrets.DOCKERHUB_USERNAME }}
+        run: mvn -pl eureka-server,service-one,service-two,reactive-service,websocket-service,gateway  -Dmaven.test.skip=true package jib:build -Djib.to.auth.username=${{ secrets.DOCKERHUB_USERNAME }} -Djib.to.auth.password=${{ secrets.DOCKERHUB_PASSWORD }}
 
