@@ -47,7 +47,7 @@ mvn -pl eureka-server,service-one,service-two,reactive-service,websocket-service
 
 To build docker image for frontend, run the following command inside `frontend` folder.
 ```sh
-docker build -t dhananjay12/demo-frontend .
+docker build -t dhananjay12/demo-frontend:latest .
 ```
 
 **Note** :- Whatever image `prefix` name you give, change in the `k8s` accordingly.

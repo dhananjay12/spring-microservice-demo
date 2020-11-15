@@ -4,7 +4,6 @@ metadata:
   name: ingress-backend-service
   annotations:
     nginx.ingress.kubernetes.io/use-regex: "true"
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
   rules:
   - http:
@@ -13,7 +12,7 @@ spec:
           backend:
             serviceName: gateway
             servicePort: 8080
-        - path: /mywebsocket(/|$)(.*)
+        - path: /websocketservice/.*
           backend:
             serviceName: gateway
             servicePort: 8080
