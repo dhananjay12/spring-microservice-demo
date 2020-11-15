@@ -60,7 +60,7 @@ kubectl apply -f k8s
 
 ## Endpoints
 
-### Service One(REST)
+### Service One (REST)
 
 **Endpoint** - `/hello`, `/headers` and `/hop/{status}`. 
 
