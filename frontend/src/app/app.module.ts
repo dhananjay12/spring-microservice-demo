@@ -28,11 +28,11 @@ import { FormsModule } from '@angular/forms';
     FormsModule,
     HttpClientModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent },
-      { path: 'rest', component: RestComponent },
-      { path: 'reactive', component: ReactiveComponent },
-      { path: 'websocket', component: WebsocketComponent }
-    ])
+    { path: '', component: HomeComponent },
+    { path: 'rest', component: RestComponent },
+    { path: 'reactive', component: ReactiveComponent },
+    { path: 'websocket', component: WebsocketComponent }
+], { relativeLinkResolution: 'legacy' })
   ],
   providers: [RestService,WebsocketService,ReactiveService],
   bootstrap: [AppComponent]

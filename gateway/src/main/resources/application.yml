@@ -17,12 +17,18 @@ spring:
       routes:
         - id: websocket-sockjs-route
           uri: http://websocketservice
+          order: -1
           predicates:
             - Path=/websocketservice/info/**
+          filters:
+            - StripPrefix=1
         - id: websocket_route
-          uri: ws://websocketservice
+          uri: lb:ws://websocketservice
+          order: -1
           predicates:
             - Path=/websocketservice/**
+          filters:
+            - StripPrefix=1
     kubernetes:
       discovery:
         enabled: false

@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: gateway
+  name: reactive-service
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: gateway
+      app: reactive-service
   template:
     metadata:
       labels:
-        app: gateway
+        app: reactive-service
     spec:
       containers:
       - env:
@@ -22,8 +22,8 @@ spec:
           value: "true"
         - name: SPRING_CLOUD_KUBERNETES_RELOAD_ENABLED
           value: "true"
-        image: dhananjay12/demo-gateway:latest
-        name: gateway
+        image: dhananjay12/demo-reactive-service:latest
+        name: reactive-service
         imagePullPolicy: Always
         resources:
           requests:

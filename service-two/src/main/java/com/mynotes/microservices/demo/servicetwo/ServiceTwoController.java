@@ -1,5 +1,7 @@
 package com.mynotes.microservices.demo.servicetwo;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -27,16 +29,21 @@ public class ServiceTwoController {
     @ResponseBody
     public String hello() {
 
-        return "Hello from service one";
+        return "Hello from service two";
     }
 
     @GetMapping("/headers")
-    public ResponseEntity<?> headers(@RequestHeader MultiValueMap<String, String> headers) {
+    @ResponseBody
+    public Map<String, String> headers(@RequestHeader MultiValueMap<String, String> headers) {
+
+        Map<String, String> map = new HashMap<>();
+
         headers.forEach((key, value) -> {
             log.info(String.format("Header '%s' = %s", key, value.stream().collect(Collectors.joining("|"))));
+            map.put(key, value.stream().collect(Collectors.joining("|")));
         });
 
-        return ResponseEntity.ok(headers);
+        return map;
     }
 
 }

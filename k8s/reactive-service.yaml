@@ -2,12 +2,12 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    name: gateway
-  name: gateway
+    name: reactive-service
+  name: reactive-service
 spec:
   type: ClusterIP
   selector:
-    app: gateway
+    app: reactive-service
   ports:
   - port: 8080
     targetPort: 8080

@@ -1,9 +1,17 @@
 {
   "/api": {
-    "target": "http://localhost:8050/",
+    "target": "http://localhost:8080/",
     "secure": false,
     "changeOrigin": true,
     "logLevel": "debug",
-    "pathRewrite": {"^/api" : ""}
+    "headers": { "host": "localhost" }
+  },
+  "/mywebsocket": {
+    "target": "http://localhost:8080/",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "pathRewrite": {"^/mywebsocket" : ""},
+    "headers": { "host": "localhost" }
   }
 }

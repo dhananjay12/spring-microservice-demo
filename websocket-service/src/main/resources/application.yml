@@ -11,8 +11,16 @@ eureka:
       defaultZone: http://localhost:8080/eureka/
 
 spring:
+  sleuth:
+    integration:
+      websockets:
+        enabled: false
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
   cloud:
     kubernetes:
+      discovery:
+        enabled: false
       enabled: false
       reload:
         enabled: false

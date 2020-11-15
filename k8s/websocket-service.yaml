@@ -2,14 +2,13 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    run: websocketservice
+    name: websocketservice
   name: websocketservice
 spec:
-  type: NodePort
+  type: ClusterIP
   selector:
-    component: websocketservice
-    run: websocketservice
+    app: websocketservice
   ports:
-  - port: 8400
-    targetPort: 8400
+  - port: 8080
+    targetPort: 8080
     protocol: TCP

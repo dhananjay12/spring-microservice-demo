@@ -1,34 +1,34 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-  labels:
-    run: websocketservice
   name: websocketservice
 spec:
   replicas: 1
   selector:
     matchLabels:
-      run: websocketservice
-      component: websocketservice
+      app: websocketservice
   template:
     metadata:
       labels:
-        run: websocketservice
-        component: websocketservice
+        app: websocketservice
     spec:
       containers:
       - env:
-        - name: JAVA_OPTS
-          value: -Djava.security.egd=file:/dev/./urandom
-        - name: SPRING_PROFILES_ACTIVE
-          value: default,k8
-        image: poc-websocket-service:latest
+        - name: EUREKA_CLIENT_ENABLED
+          value: "false"
+        - name: SPRING_CLOUD_KUBERNETES_ENABLED
+          value: "true"
+        - name: SPRING_CLOUD_KUBERNETES_DISCOVERY_ENABLED
+          value: "true"
+        - name: SPRING_CLOUD_KUBERNETES_RELOAD_ENABLED
+          value: "true"
+        image: dhananjay12/demo-websocket-service:latest
         name: websocketservice
+        imagePullPolicy: Always
         resources:
           requests:
             memory: "256Mi"
           limits:
             memory: "512Mi"
         ports:
-        - containerPort: 8400
-          protocol: TCP
+          - containerPort: 8080

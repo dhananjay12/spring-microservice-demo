@@ -12,14 +12,14 @@ export class RestService {
     private errorHandlerService: ErrorHandlerService
   ) {}
 
-  getAddress() {
+  hop(status) {
     const headers = new HttpHeaders().set(
       "Content-Type",
       "text/plain; charset=utf-8"
     );
 
     return this.httpClient
-      .get("/api/user-service/address/company", {
+      .get("/api/service-one/hop/"+status, {
         headers,
         responseType: "text"
       })
@@ -32,32 +32,34 @@ export class RestService {
     );
 
     return this.httpClient
-      .get("/api/user-service/users/headers", {
+      .get("/api/service-one/headers", {
         headers
       })
       .pipe(catchError(this.errorHandlerService.handleError));
   }
 
-  getUser(id) {
-    return this.httpClient
-      .get("/api/user-service/users/"+id)
-      .pipe(catchError(this.errorHandlerService.handleError));
-  }
-
-  getUsers(queryParameters) {
-    return this.httpClient
-      .get("/api/user-service/users/multiple"+queryParameters)
-      .pipe(catchError(this.errorHandlerService.handleError));
-  }
-
-  getContactUsAddress() {
+  helloFromServiceOne() {
     const headers = new HttpHeaders().set(
       "Content-Type",
       "text/plain; charset=utf-8"
     );
 
     return this.httpClient
-      .get("/api/contact-us-service/contactUs/address", {
+      .get("/api/service-one/hello", {
+        headers,
+        responseType: "text"
+      })
+      .pipe(catchError(this.errorHandlerService.handleError));
+  }
+
+  helloFromServiceTwo() {
+    const headers = new HttpHeaders().set(
+      "Content-Type",
+      "text/plain; charset=utf-8"
+    );
+
+    return this.httpClient
+      .get("/api/service-two/hello", {
         headers,
         responseType: "text"
       })

@@ -9,29 +9,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RestComponent implements OnInit {
 
-  userResult: string;
-  contactUsResult: string;
+  serviceOneResult: string;
+  serviceTwoResult: string;
   userResultObj: any;
-  userResultArr: any;
   headerResult: any
+  hopResult: string;
 
   constructor(private service: RestService) { }
 
   ngOnInit() {
-    this.service.getAddress().subscribe(result=> this.userResult=result);
-    this.service.getContactUsAddress().subscribe(result=> this.contactUsResult=result);
+    this.service.helloFromServiceOne().subscribe(result=> this.serviceOneResult=result);
+    this.service.helloFromServiceTwo().subscribe(result=> this.serviceTwoResult=result);
   }
 
-  getUser(id){
-    this.service.getUser(id).subscribe(result=> this.userResultObj=result);
+  hop(status){
+    this.service.hop(status).subscribe(result=> this.hopResult=result);
   }
 
   sendHeader(headerKey,HeaderValue){
     this.service.sendHeader(headerKey,HeaderValue).subscribe(result=> this.headerResult=result);
   }
 
-  getUsers(queryParameters){
-    this.service.getUsers(queryParameters).subscribe(result=> this.userResultArr=result);
-  }
+
 
 }

@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: gateway
+  name: service-one
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: gateway
+      app: service-one
   template:
     metadata:
       labels:
-        app: gateway
+        app: service-one
     spec:
       containers:
       - env:
@@ -22,8 +22,8 @@ spec:
           value: "true"
         - name: SPRING_CLOUD_KUBERNETES_RELOAD_ENABLED
           value: "true"
-        image: dhananjay12/demo-gateway:latest
-        name: gateway
+        image: dhananjay12/demo-service-one:latest
+        name: service-one
         imagePullPolicy: Always
         resources:
           requests:

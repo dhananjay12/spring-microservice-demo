@@ -2,13 +2,13 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    name: gateway
-  name: gateway
+    name: frontend
+  name: frontend
 spec:
   type: ClusterIP
   selector:
-    app: gateway
+    app: frontend
   ports:
-  - port: 8080
-    targetPort: 8080
+  - port: 80
+    targetPort: 80
     protocol: TCP

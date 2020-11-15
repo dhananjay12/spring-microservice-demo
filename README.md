@@ -8,8 +8,11 @@ The project can be run using docker-compose or deployed in Kubernetes.
 ### Build and Run Backend
 To build docker images for backend run following command:
 ```sh
-mvn clean install 
+mvn -pl eureka-server,service-one,service-two,reactive-service,websocket-service,gateway  -Dmaven.test.skip=true package jib:dockerBuild
 ```
+
+`dockerBuild` requires your system to have the docker demon and will build images locally. `build` is more efficient but wont build images locally.
+ You might need to change the `docker.image.url` in pom.xml if you are using `build`.
 
 Now, just run all the service using docker-compose:
 
@@ -37,14 +40,14 @@ npm run start
 
 To build docker images for backend run following command:
 ```sh
-mvn clean install -Ddocker
+mvn -pl eureka-server,service-one,service-two,reactive-service,websocket-service,gateway  -Dmaven.test.skip=true package jib:dockerBuild
 ```
 
 ### Build Frontend Image
 
 To build docker image for frontend, run the following command inside `frontend` folder.
 ```sh
-docker build -t poc-frontend .
+docker build -t dhananjay12/demo-frontend .
 ```
 
 **Note** :- Whatever image `prefix` name you give, change in the `k8s` accordingly.
@@ -57,20 +60,22 @@ kubectl apply -f k8s
 
 ## Endpoints
 
-### User Service (REST)
+### Service One(REST)
 
-**Endpoint** - `/users/getPublicMailingAddress` 
+**Endpoint** - `/hello`, `/headers` and `/hop/{status}`. 
 
-If calling via gateway then - `/user-service/users/getPublicMailingAddress`
+If calling via gateway then - `/api/service-one/hello`
+
+`/hop/{status}` internally calls `service-two` `/status/{status}` endpoint and the response will be that code.
 
 ### Contact Us Service (REST)
 
-**Endpoint** - `/contactUs/address` 
+**Endpoint** - `/hello` and `/status/{status}`
 
-If calling via gateway then - `/contact-us-service/contactUs/address`
-This internally calls `user-service` and produce appended result.
+If calling via gateway then - `/api/service-two/hello`
 
-### Reactive Web Producer (Reactive)
+
+### Reactive Service (Web Flux)
 
 **Endpoint**  - `/greetings/sse`  and `/greetings`
 
@@ -83,10 +88,3 @@ If calling via gateway then - `/reactive-web-producer/greetings/sse`
 **Message Mapping** - `/hello`
 
 If calling via gateway then - `/websocketservice/gs-guide-websocket`
-
-## Profiles
-Each backend project has both `eureka-client` and `spring-cloud-kubernetes` jars. 
-
-If run by `traditional` profile, it expects Eureka server to be present.
-
-When running on Kubernetes, each service is inside a "Deployment" and exposed via "Service". Therefore, we don't need Eureka as a service discovery mechanism and we can use the services list inside K8 itself. So run with `k8` profile.
