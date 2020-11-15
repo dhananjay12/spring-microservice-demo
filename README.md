@@ -52,11 +52,23 @@ docker build -t dhananjay12/demo-frontend .
 
 **Note** :- Whatever image `prefix` name you give, change in the `k8s` accordingly.
 
+### Install local ingress
+
+https://kubernetes.github.io/ingress-nginx/deploy/
+
+```
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.41.2/deploy/static/prov
+ider/cloud/deploy.yaml
+```
+If you want to delete later just use `delete` afterwards.
+
 ### Run on K8
 
 ```
 kubectl apply -f k8s
 ```
+
+Open - `localhost`
 
 ## Endpoints
 
