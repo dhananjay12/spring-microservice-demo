@@ -11,7 +11,7 @@ export class WebsocketComponent implements OnInit {
 
   greetings: Array<any> = [];
   name: string;
-  webSocketEndPoint: string = '/mywebsocket/websocketservice/gs-guide-websocket';
+  webSocketEndPoint: string = '/websocketservice/gs-guide-websocket';
   topic: string = "/topic/greetings";
   stompClient: any;
   buttonDisabled: boolean = false;

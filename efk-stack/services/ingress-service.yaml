@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: ingress-backend-service
+  annotations:
+    nginx.ingress.kubernetes.io/use-regex: "true"
+spec:
+  rules:
+  - http:
+      paths:
+        - path: /api/.*
+          backend:
+            serviceName: gateway
+            servicePort: 8080
+        - path: /websocketservice/.*
+          backend:
+            serviceName: gateway
+            servicePort: 8080
