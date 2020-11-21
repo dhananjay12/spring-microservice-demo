@@ -1,0 +1,23 @@
+global:
+  scrape_interval: 10s
+
+scrape_configs:
+  - job_name: 'gateway'
+    metrics_path: '/actuator/prometheus'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['gateway:8080']
+  - job_name: 'service-one'
+    metrics_path: '/actuator/prometheus'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['service-one:8080']
+  - job_name: 'service-two'
+    metrics_path: '/actuator/prometheus'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['service-two:8080']
+  - job_name: "node-exporter"
+    scrape_interval: "15s"
+    static_configs:
+      - targets: ['node-exporter:9100']

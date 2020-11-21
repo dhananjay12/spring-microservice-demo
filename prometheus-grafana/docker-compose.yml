@@ -1,0 +1,68 @@
+version: "3.7"
+
+x-common-variables: &common-variables
+  eureka.client.serviceUrl.defaultZone: http://eureka:8080/eureka
+  eureka.instance.non-secure-port: 8080
+
+services:
+  eureka:
+    image: "dhananjay12/demo-eureka-server:latest"
+    environment:
+      <<: *common-variables
+    ports:
+      - "8761:8080"
+  frontend:
+    image: "dhananjay12/demo-frontend:latest"
+    volumes:
+      - ./config/frontend/nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - "80:80"
+  gateway:
+    image: "dhananjay12/demo-gateway:latest"
+    environment:
+      <<: *common-variables
+    ports:
+      - "8080:8080"
+  service-one:
+    image: "dhananjay12/demo-service-one:latest"
+    environment:
+      <<: *common-variables
+    ports:
+      - "8100:8080"
+  service-two:
+    image: "dhananjay12/demo-service-two:latest"
+    environment:
+      <<: *common-variables
+    ports:
+      - "8200:8080"
+
+  prometheus:
+    image: prom/prometheus
+    volumes:
+      - ./config/prometheus/:/etc/prometheus/
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+    ports:
+      - 9090:9090
+
+  node-exporter:
+    image: prom/node-exporter:latest
+    ports:
+      - 9100:9100
+
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - 3000:3000
+    depends_on:
+      - prometheus
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./config/grafana/provisioning/:/etc/grafana/provisioning
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+
+volumes:
+  grafana_data:
