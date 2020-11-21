@@ -1,6 +1,6 @@
 ## Services
 
-All images have port `8080` and exposed on different ports.
+All java images have port `8080` and exposed on different ports.
 
 Frontend - http://localhost
 
