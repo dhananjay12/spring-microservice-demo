@@ -37,6 +37,8 @@ spring:
         enabled: false
       reload:
         enabled: false
+  zipkin:
+    enabled: false
 
 management:
   endpoints:

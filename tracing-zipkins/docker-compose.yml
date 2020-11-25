@@ -1,0 +1,46 @@
+version: "3.7"
+
+x-common-variables: &common-variables
+  EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:8080/eureka
+  EUREKA_INSTANCE_NONSECUREPORT: 8080
+  SPRING_ZIPKIN_ENABLED: 'true'
+  SPRING_ZIPKIN_BASEURL: 'http://zipkin:9411'
+  SPRING_SLEUTH_SAMPLER_PROBABILITY: 1
+
+services:
+  eureka:
+    image: "dhananjay12/demo-eureka-server:latest"
+    environment:
+      <<: *common-variables
+    ports:
+      - "8761:8080"
+  frontend:
+    image: "dhananjay12/demo-frontend:latest"
+    volumes:
+      - ./config/frontend/nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - "80:80"
+  gateway:
+    image: "dhananjay12/demo-gateway:latest"
+    environment:
+      <<: *common-variables
+    ports:
+      - "8080:8080"
+  service-one:
+    image: "dhananjay12/demo-service-one:latest"
+    environment:
+      <<: *common-variables
+    ports:
+      - "8100:8080"
+  service-two:
+    image: "dhananjay12/demo-service-two:latest"
+    environment:
+      <<: *common-variables
+    ports:
+      - "8200:8080"
+  zipkin:
+    image: openzipkin/zipkin
+    environment:
+      - STORAGE_TYPE=mem
+    ports:
+      - 9411:9411
