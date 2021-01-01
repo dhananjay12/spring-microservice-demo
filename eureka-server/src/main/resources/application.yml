@@ -4,3 +4,7 @@ eureka:
     fetchRegistry: false
   server:
     waitTimeInMsWhenSyncEmpty: 0
+
+spring:
+  application:
+    name: eureka-server

@@ -11,6 +11,8 @@ eureka:
       defaultZone: http://localhost:8080/eureka/
 
 spring:
+  application:
+    name: websocketservice
   sleuth:
     integration:
       websockets:
@@ -18,6 +20,8 @@ spring:
   autoconfigure:
     exclude: org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
   cloud:
+    bootstrap:
+      enabled: true
     kubernetes:
       discovery:
         enabled: false
