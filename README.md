@@ -52,7 +52,7 @@ docker build -t dhananjay12/demo-frontend:latest .
 
 **Note** :- Whatever image `prefix` name you give, change in the `k8s` accordingly.
 
-### Install local ingress
+### Install local Ingress
 
 https://kubernetes.github.io/ingress-nginx/deploy/
 
