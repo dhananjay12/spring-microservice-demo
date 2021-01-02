@@ -7,7 +7,7 @@
 	<artifactId>websocket-service</artifactId>
 	<name>websocket-service</name>
 	<description>Demo project for Spring Boot</description>
-
+  <!-- Upgrading to 2.4.1 and 2020.0.0 has some issues. Run standalone before updating-->
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
@@ -56,7 +56,7 @@
       <groupId>io.micrometer</groupId>
       <artifactId>micrometer-registry-prometheus</artifactId>
     </dependency>
-    <dependency>
+   <dependency>
       <groupId>org.springframework.cloud</groupId>
       <artifactId>spring-cloud-starter-kubernetes</artifactId>
     </dependency>

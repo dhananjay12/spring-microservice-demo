@@ -12,7 +12,11 @@ eureka:
       defaultZone: http://localhost:8080/eureka/
 
 spring:
+  application:
+    name: service-one
   cloud:
+    bootstrap:
+      enabled: true
     kubernetes:
       enabled: false
       reload:
