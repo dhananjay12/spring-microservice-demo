@@ -11,6 +11,8 @@ eureka:
       defaultZone: http://localhost:8761/eureka/
 
 spring:
+  main:
+    banner-mode: off
   application:
     name: service-two
   cloud:
