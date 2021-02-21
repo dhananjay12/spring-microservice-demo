@@ -14,6 +14,8 @@ export class RestComponent implements OnInit {
   userResultObj: any;
   headerResult: any
   hopResult: string;
+  messageResult: string;
+  divisionResult: string;
 
   constructor(private service: RestService) { }
 
@@ -30,6 +32,12 @@ export class RestComponent implements OnInit {
     this.service.sendHeader(headerKey,HeaderValue).subscribe(result=> this.headerResult=result);
   }
 
+  messageServiceOne(text){
+    this.service.messageServiceOne(text).subscribe(result=> this.messageResult=result);
+  }
 
+  divisionServiceTwo(num1,num2){
+    this.service.divisionServiceTwo(num1,num2).subscribe(result=> this.divisionResult=result);
+  }
 
 }

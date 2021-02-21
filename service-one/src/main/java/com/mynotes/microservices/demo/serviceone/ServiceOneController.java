@@ -44,17 +44,6 @@ public class ServiceOneController {
         return "Service one+++++" + result;
     }
 
-    @RequestMapping(value = "/calculate/divide/{a}/{b}", method = RequestMethod.GET)
-    @ResponseBody
-    public Double divide(@PathVariable("a") Double a, @PathVariable("b") Double b) {
-
-        log.debug("Passed values {}/{}", a, b);
-
-        Double result = a / b;
-
-        return result;
-    }
-
     @RequestMapping(value = "/hello", method = RequestMethod.GET)
     @ResponseBody
     public String hello() {

@@ -40,6 +40,17 @@ public class ServiceTwoController {
 
     }
 
+    @RequestMapping(value = "/calculate/divide/{a}/{b}", method = RequestMethod.GET)
+    @ResponseBody
+    public Integer divide(@PathVariable("a") Integer a, @PathVariable("b") Integer b) {
+
+        log.debug("Passed values {}/{}", a, b);
+
+        int result = a / b;
+
+        return result;
+    }
+
     @GetMapping("/headers")
     @ResponseBody
     public Map<String, String> headers(@RequestHeader MultiValueMap<String, String> headers) {

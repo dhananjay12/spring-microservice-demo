@@ -1,43 +1,57 @@
 <div class="container">
-    <div class="jumbotron">
-      <h2>REST CALL</h2>
-    </div>
-    <a routerLink="/" href="#" class="btn btn-primary">Home</a>
-    <div class="row">
-        <div class="col-sm-6">
-          <div class="card text-center text-white bg-success mb-3">
-            <div class="card-body">
-              <h3 class="card-title">Service One</h3>
-              <h5 class="card-title blue">1- GET /hello</h5>
-              <h5 class="card-title" [ngStyle]="{'font-weight': 'bold'}">Response:</h5>
-              <p class="card-text">{{serviceOneResult}}</p>
+  <div class="jumbotron">
+    <h2>REST CALL</h2>
+  </div>
+  <a routerLink="/" href="#" class="btn btn-primary">Home</a>
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="card text-center text-white bg-success mb-3">
+        <div class="card-body">
+          <h3 class="card-title">Service One</h3>
+          <h5 class="card-title blue">1- GET /hello</h5>
+          <h5 class="card-title" [ngStyle]="{'font-weight': 'bold'}">Response:</h5>
+          <p class="card-text">{{serviceOneResult}}</p>
 
-              <h5 class="card-title blue">2- GET /hop/status</h5>
-              <input #status placeholder="StatusValue" >
-              <button (click)="hop(status.value)" class="btn btn-primary">Submit</button>
-              <h5 class="card-title" [ngStyle]="{'font-weight': 'bold'}">Response:</h5>
-              <p class="card-text">{{hopResult}}</p>
+          <h5 class="card-title blue">2- GET /hop/status</h5>
+          <input #status placeholder="StatusValue">
+          <button (click)="hop(status.value)" class="btn btn-primary">Submit</button>
+          <h5 class="card-title" [ngStyle]="{'font-weight': 'bold'}">Response:</h5>
+          <p class="card-text">{{hopResult}}</p>
 
-              <h5 class="card-title blue" >3 GET /headers</h5>
-              <input #headerKey placeholder="HeaderKey" >
-              <input #headerValue placeholder="HeaderValue" >
-              <button (click)="sendHeader(headerKey.value,headerValue.value)" class="btn btn-primary">Submit</button>
-              <h5 class="card-title" [ngStyle]="{'font-weight': 'bold'}">Request headers to Downstream Service  :</h5>
-              <div *ngFor="let item of headerResult| keyvalue">
-                  <span [ngStyle]="{'font-weight': 'bold'}">{{ item.key }}</span> :: {{ item.value }}
-                </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-6">
-          <div class="card text-center text-white bg-info mb-3">
-              <div class="card-body">
-                  <h3 class="card-title">Service Two</h3>
-                  <h5 class="card-title blue">1- GET /hello</h5>
-                  <h5 class="card-title">Response:</h5>
-                  <p class="card-text">{{serviceTwoResult}}</p>
+          <h5 class="card-title blue">3- GET /message</h5>
+          <input #message placeholder="MessageValue">
+          <button (click)="messageServiceOne(message.value)" class="btn btn-primary">Submit</button>
+          <h5 class="card-title" [ngStyle]="{'font-weight': 'bold'}">Response:</h5>
+          <p class="card-text">{{messageResult}}</p>
+
+          <h5 class="card-title blue">4 GET /headers</h5>
+          <input #headerKey placeholder="HeaderKey">
+          <input #headerValue placeholder="HeaderValue">
+          <button (click)="sendHeader(headerKey.value,headerValue.value)" class="btn btn-primary">Submit</button>
+          <h5 class="card-title" [ngStyle]="{'font-weight': 'bold'}">Request headers to Downstream Service :</h5>
+          <div *ngFor="let item of headerResult| keyvalue">
+            <span [ngStyle]="{'font-weight': 'bold'}">{{ item.key }}</span> :: {{ item.value }}
           </div>
         </div>
       </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="card text-center text-white bg-info mb-3">
+        <div class="card-body">
+          <h3 class="card-title">Service Two</h3>
+          <h5 class="card-title blue">1- GET /hello</h5>
+          <h5 class="card-title">Response:</h5>
+          <p class="card-text">{{serviceTwoResult}}</p>
 
-</div>
+          <h5 class="card-title blue">2- GET /calculate/divide</h5>
+           <input #num1 placeholder="Number1">
+          <input #num2 placeholder="Number2">
+          <button (click)="divisionServiceTwo(num1.value,num2.value)" class="btn btn-primary">Submit</button>
+          <h5 class="card-title" [ngStyle]="{'font-weight': 'bold'}">Response:</h5>
+          <p class="card-text">{{divisionResult}}</p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>

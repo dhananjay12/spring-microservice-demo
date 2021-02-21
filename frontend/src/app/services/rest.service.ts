@@ -66,14 +66,26 @@ export class RestService {
       .pipe(catchError(this.errorHandlerService.handleError));
   }
 
-  textServiceOne() {
-    const headers = new HttpHeaders().set(
+  messageServiceOne(text) {
+     const headers = new HttpHeaders().set(
       "Content-Type",
       "text/plain; charset=utf-8"
     );
-
     return this.httpClient
-      .get("/api/service-two/hello", {
+      .get("/api/service-one/message/"+text, {
+        headers,
+        responseType: "text"
+      })
+      .pipe(catchError(this.errorHandlerService.handleError));
+  }
+
+  divisionServiceTwo(num1,num2) {
+     const headers = new HttpHeaders().set(
+      "Content-Type",
+      "text/plain; charset=utf-8"
+    );
+    return this.httpClient
+      .get("/api/service-two/calculate/divide/"+num1+"/"+num2, {
         headers,
         responseType: "text"
       })
