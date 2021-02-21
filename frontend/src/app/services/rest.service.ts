@@ -65,4 +65,18 @@ export class RestService {
       })
       .pipe(catchError(this.errorHandlerService.handleError));
   }
+
+  textServiceOne() {
+    const headers = new HttpHeaders().set(
+      "Content-Type",
+      "text/plain; charset=utf-8"
+    );
+
+    return this.httpClient
+      .get("/api/service-two/hello", {
+        headers,
+        responseType: "text"
+      })
+      .pipe(catchError(this.errorHandlerService.handleError));
+  }
 }

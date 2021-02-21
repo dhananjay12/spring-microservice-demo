@@ -1,4 +1,7 @@
 ---
+# Permit co-located instances for solitary minikube virtual machines.
+antiAffinity: "soft"
+
 # Shrink default JVM heap.
 esJavaOpts: "-Xmx128m -Xms128m"
 
@@ -11,10 +14,11 @@ resources:
     cpu: "1000m"
     memory: "512M"
 
-# Request smaller persistent volumes.
+# Request smaller persistent volumes for local. This is for Docker Desktop
+# https://github.com/elastic/helm-charts/blob/master/elasticsearch/examples/docker-for-mac/values.yaml
 volumeClaimTemplate:
   accessModes: [ "ReadWriteOnce" ]
-  storageClassName: "standard"
+  storageClassName: "hostpath"
   resources:
     requests:
       storage: 100M

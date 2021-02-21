@@ -33,6 +33,28 @@ public class ServiceOneController {
         return "Service one" + status + "  ++++ " + result;
     }
 
+    @RequestMapping(value = "/message/{text}", method = RequestMethod.GET)
+    @ResponseBody
+    public String text(@PathVariable("text") String text) {
+
+        log.info("Text passed==" + text);
+
+        String result = rest.getForObject("http://service-two/message/" + text, String.class);
+
+        return "Service one+++++" + result;
+    }
+
+    @RequestMapping(value = "/calculate/divide/{a}/{b}", method = RequestMethod.GET)
+    @ResponseBody
+    public Double divide(@PathVariable("a") Double a, @PathVariable("b") Double b) {
+
+        log.debug("Passed values {}/{}", a, b);
+
+        Double result = a / b;
+
+        return result;
+    }
+
     @RequestMapping(value = "/hello", method = RequestMethod.GET)
     @ResponseBody
     public String hello() {
