@@ -42,12 +42,18 @@ public class ServiceTwoController {
 
     @RequestMapping(value = "/calculate/divide/{a}/{b}", method = RequestMethod.GET)
     @ResponseBody
-    public Integer divide(@PathVariable("a") Integer a, @PathVariable("b") Integer b) {
+    public String divide(@PathVariable("a") Integer a, @PathVariable("b") Integer b) {
 
         log.debug("Passed values {}/{}", a, b);
-
-        int result = a / b;
-
+        String result;
+        try{
+            int c = a / b;
+            result= String.valueOf(c);
+        }catch (Exception e){
+            e.printStackTrace();
+            result = "Error";
+            log.error("Error in division");
+        }
         return result;
     }
 

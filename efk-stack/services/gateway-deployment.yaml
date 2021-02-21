@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: gateway
+  name: demo-gateway
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: gateway
+      app: demo-gateway
   template:
     metadata:
       labels:
-        app: gateway
+        app: demo-gateway
     spec:
       containers:
       - env:
@@ -23,7 +23,7 @@ spec:
         - name: SPRING_CLOUD_KUBERNETES_RELOAD_ENABLED
           value: "true"
         image: dhananjay12/demo-gateway:latest
-        name: gateway
+        name: demo-gateway
         imagePullPolicy: Always
         resources:
           requests:
