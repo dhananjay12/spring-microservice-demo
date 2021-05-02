@@ -16,10 +16,10 @@ spring:
   application:
     name: service-two
   cloud:
-    bootstrap:
-      enabled: true
     kubernetes:
       enabled: false
+      config:
+        enabled: false
       reload:
         enabled: false
   zipkin:

@@ -4,8 +4,6 @@ spring:
   application:
     name: gateway
   cloud:
-    bootstrap:
-      enabled: true
     gateway:
       discovery:
         locator:
@@ -39,6 +37,8 @@ spring:
       discovery:
         enabled: false
       enabled: false
+      config:
+        enabled: false
       loadbalancer:
         enabled: false
       reload:
