@@ -30,7 +30,7 @@ services:
       #spring.cloud.kubernetes.secrets.enabled: "false"
       #spring.cloud.kubernetes.discovery.enabled: "false"
       #spring.cloud.kubernetes.config.enabled: "false"
-      spring.cloud.kubernetes.config.enable-api: "false"
+      #spring.cloud.kubernetes.config.enable-api: "false"
       #spring.cloud.bootstrap.enabled: "false"
       #spring.sleuth.reactor.instrumentation-type: DECORATE_QUEUES
     ports:
