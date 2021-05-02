@@ -17,10 +17,14 @@ spring:
     name: service-two
   cloud:
     kubernetes:
+      discovery:
+        enabled: false
       enabled: false
       config:
         enabled: false
         enable-api: false
+      loadbalancer:
+        enabled: false
       reload:
         enabled: false
   zipkin:
