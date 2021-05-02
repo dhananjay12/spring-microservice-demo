@@ -21,6 +21,7 @@ spring:
       enabled: false
       config:
         enabled: false
+        enable-api: false
       reload:
         enabled: false
   zipkin:

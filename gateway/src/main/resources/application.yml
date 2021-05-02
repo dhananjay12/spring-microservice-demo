@@ -39,6 +39,7 @@ spring:
       enabled: false
       config:
         enabled: false
+        enable-api: false
       loadbalancer:
         enabled: false
       reload:
