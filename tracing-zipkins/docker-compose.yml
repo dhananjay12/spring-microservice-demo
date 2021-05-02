@@ -24,6 +24,8 @@ services:
     image: "dhananjay12/demo-gateway:latest"
     environment:
       <<: *common-variables
+      spring.cloud.bootstrap.enabled: "false"
+      spring.sleuth.reactor.instrumentation-type: DECORATE_QUEUES
     ports:
       - "8080:8080"
   service-one:
