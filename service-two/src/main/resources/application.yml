@@ -21,8 +21,8 @@ spring:
         enabled: false
       enabled: false
       config:
-        enabled: false
         enable-api: false
+        enabled: false
       loadbalancer:
         enabled: false
       reload:

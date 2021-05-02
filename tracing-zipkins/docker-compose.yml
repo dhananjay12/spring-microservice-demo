@@ -27,7 +27,7 @@ services:
       #spring.cloud.kubernetes.enabled: "false"
       #spring.cloud.kubernetes.leader.auto-startup: "false"
       #spring.cloud.kubernetes.leader.enabled: "false"
-      spring.cloud.kubernetes.secrets.enabled: "false"
+      #spring.cloud.kubernetes.secrets.enabled: "false"
       #spring.cloud.kubernetes.discovery.enabled: "false"
       #spring.cloud.kubernetes.config.enabled: "false"
       spring.cloud.kubernetes.config.enable-api: "false"

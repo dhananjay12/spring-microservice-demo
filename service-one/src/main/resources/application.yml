@@ -20,8 +20,8 @@ spring:
     kubernetes:
       enabled: false
       config:
-        enabled: false
         enable-api: false
+        enabled: false
       reload:
         enabled: false
   zipkin:

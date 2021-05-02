@@ -37,12 +37,12 @@ spring:
       discovery:
         enabled: false
       enabled: false
-      config:
-        enabled: false
-        enable-api: false
       loadbalancer:
         enabled: false
       reload:
+        enabled: false
+      config:
+        enable-api: false
         enabled: false
   zipkin:
     enabled: false
