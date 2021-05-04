@@ -42,8 +42,6 @@ spring:
       reload:
         enabled: false
       config:
-        enable-api: false
-        enableApi: false
         enabled: false
   zipkin:
     enabled: false

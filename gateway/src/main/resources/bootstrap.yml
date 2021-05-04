@@ -1,0 +1,9 @@
+#Disable kubernetes initially. https://docs.spring.io/spring-cloud-kubernetes/docs/current/reference/html/index.html#kubernetes-ecosystem-awareness
+spring:
+  cloud:
+    kubernetes:
+      enabled: false
+      config:
+        enabled: false
+      secrets:
+        enabled: false
