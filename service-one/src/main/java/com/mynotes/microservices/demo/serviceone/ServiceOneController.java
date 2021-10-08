@@ -19,8 +19,11 @@ import org.springframework.web.client.RestTemplate;
 @Slf4j
 public class ServiceOneController {
 
-    @Autowired
-    RestTemplate rest;
+    RestTemplate restTemplate;
+
+    public ServiceOneController(RestTemplate rest){
+        this.restTemplate = rest;
+    }
 
     @RequestMapping(value = "/hop/{status}", method = RequestMethod.GET)
     @ResponseBody
@@ -28,7 +31,7 @@ public class ServiceOneController {
 
         log.info("hop status passed" + status);
 
-        String result = rest.getForObject("http://service-two/status/" + status, String.class);
+        String result = restTemplate.getForObject("http://service-two/status/" + status, String.class);
 
         return "Service one" + status + "  ++++ " + result;
     }
@@ -39,7 +42,7 @@ public class ServiceOneController {
 
         log.info("Text passed==" + text);
 
-        String result = rest.getForObject("http://service-two/message/" + text, String.class);
+        String result = restTemplate.getForObject("http://service-two/message/" + text, String.class);
 
         return "Service one+++++" + result;
     }
@@ -63,6 +66,29 @@ public class ServiceOneController {
         });
 
         return map;
+    }
+
+    @RequestMapping(value = "/hop/headers", method = RequestMethod.GET)
+    @ResponseBody
+    public Map<String, Map<String, String>> hopHeaders(@RequestHeader MultiValueMap<String, String> headers) {
+
+        log.info("hop headers");
+
+        Map<String, Map<String, String>> result = new HashMap<>();
+        Map<String, String> requestHeaders = new HashMap<>();
+
+        headers.forEach((key, value) -> {
+            log.info(String.format("Header '%s' = %s", key, value.stream().collect(Collectors.joining("|"))));
+            requestHeaders.put(key, value.stream().collect(Collectors.joining("|")));
+        });
+        result.put("service-one",requestHeaders);
+
+
+        Map<String, String> response = restTemplate.getForEntity("http://service-two/headers", Map.class).getBody();
+
+        result.put("service-two", response);
+
+        return result;
     }
 
 }

@@ -20,3 +20,6 @@ hs_err_pid*
 
 .mvn
 *.iml
+
+**/*.tgz
+helm/test.yaml
