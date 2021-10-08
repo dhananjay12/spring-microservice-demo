@@ -6,7 +6,6 @@
   <artifactId>service-one</artifactId>
   <packaging>jar</packaging>
   <name>service-one</name>
-  <version>0.12.0</version>
   <description>Demo project for Spring</description>
 
   <parent>
