@@ -25,8 +25,6 @@ spring:
     bootstrap:
       enabled: true
     kubernetes:
-      discovery:
-        enabled: false
       enabled: false
       reload:
         enabled: false

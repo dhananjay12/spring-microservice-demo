@@ -34,8 +34,6 @@ spring:
           filters:
             - StripPrefix=1
     kubernetes:
-      discovery:
-        enabled: false
       enabled: false
       loadbalancer:
         enabled: false

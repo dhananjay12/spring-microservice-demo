@@ -17,8 +17,6 @@ spring:
     name: reactive-service
   cloud:
     kubernetes:
-      discovery:
-        enabled: false
       enabled: false
       config:
         enable-api: false
