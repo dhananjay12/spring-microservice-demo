@@ -32,6 +32,7 @@ public class ServiceOneApplication {
 	@Bean
 	RestTemplate restTemplate() {
 		RestTemplate restTemplate = null;
+		LOGGER.info("Is Debug Enabled:"+ LOGGER.isDebugEnabled());
 		if (LOGGER.isDebugEnabled()) {
 			ClientHttpRequestFactory factory
 					= new BufferingClientHttpRequestFactory(new SimpleClientHttpRequestFactory());
