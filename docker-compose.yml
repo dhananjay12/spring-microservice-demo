@@ -29,15 +29,15 @@ services:
       <<: *common-variables
     ports:
       - "8200:8080"
-  reactive-service:
-    image: "dhananjay12/demo-reactive-service:latest"
-    environment:
-      <<: *common-variables
-    ports:
-      - "8300:8080"
-  websocket-service:
-    image: "dhananjay12/demo-websocket-service:latest"
-    environment:
-      <<: *common-variables
-    ports:
-      - "8400:8080"
+#  reactive-service:
+#    image: "dhananjay12/demo-reactive-service:latest"
+#    environment:
+#      <<: *common-variables
+#    ports:
+#      - "8300:8080"
+#  websocket-service:
+#    image: "dhananjay12/demo-websocket-service:latest"
+#    environment:
+#      <<: *common-variables
+#    ports:
+#      - "8400:8080"
