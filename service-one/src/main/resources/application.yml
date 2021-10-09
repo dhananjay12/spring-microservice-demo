@@ -19,9 +19,11 @@ spring:
   cloud:
     kubernetes:
       enabled: false
-      config:
+      loadbalancer:
         enabled: false
       reload:
+        enabled: false
+      config:
         enabled: false
   zipkin:
     enabled: false
