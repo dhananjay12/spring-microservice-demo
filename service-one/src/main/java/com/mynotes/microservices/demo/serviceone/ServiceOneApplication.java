@@ -36,14 +36,13 @@ public class ServiceOneApplication {
 		if (LOGGER.isDebugEnabled()) {
 			ClientHttpRequestFactory factory
 					= new BufferingClientHttpRequestFactory(new SimpleClientHttpRequestFactory());
+			restTemplate = new RestTemplate(factory);
 			List<ClientHttpRequestInterceptor> interceptors = restTemplate.getInterceptors();
 			if (CollectionUtils.isEmpty(interceptors)) {
 				interceptors = new ArrayList<>();
 			}
 			interceptors.add(new LoggingInterceptor());
 			restTemplate.setInterceptors(interceptors);
-			restTemplate = new RestTemplate(factory);
-
 		} else {
 			restTemplate = new RestTemplate();
 		}
