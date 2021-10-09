@@ -2,6 +2,7 @@ package com.mynotes.microservices.demo.serviceone;
 
 import java.util.ArrayList;
 import java.util.List;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -19,9 +20,8 @@ import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
 @EnableDiscoveryClient
+@Slf4j
 public class ServiceOneApplication {
-
-	static Logger LOGGER = LoggerFactory.getLogger(ServiceOneApplication.class);
 
 	public static void main(String[] args) {
 		SpringApplication.run(ServiceOneApplication.class, args);
@@ -32,8 +32,8 @@ public class ServiceOneApplication {
 	@Bean
 	RestTemplate restTemplate() {
 		RestTemplate restTemplate = null;
-		LOGGER.info("Is Debug Enabled:"+ LOGGER.isDebugEnabled());
-		if (LOGGER.isDebugEnabled()) {
+		log.info("Is Debug Enabled:"+ log.isDebugEnabled());
+		if (log.isDebugEnabled()) {
 			ClientHttpRequestFactory factory
 					= new BufferingClientHttpRequestFactory(new SimpleClientHttpRequestFactory());
 			restTemplate = new RestTemplate(factory);

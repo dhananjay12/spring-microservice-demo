@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.MultiValueMap;
@@ -18,6 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @Slf4j
 public class ServiceTwoController {
+
+    @Autowired
+    ApplicationContext context;
 
     @RequestMapping(value = "/status/{status}", method = RequestMethod.GET)
     public ResponseEntity<?> status(@PathVariable("status") Integer status) {
@@ -62,6 +67,8 @@ public class ServiceTwoController {
     public Map<String, String> headers(@RequestHeader MultiValueMap<String, String> headers) {
 
         Map<String, String> map = new HashMap<>();
+
+        log.info("server.forward-headers-strategy = "+ context.getEnvironment().getProperty("server.forward-headers-strategy"));
 
         headers.forEach((key, value) -> {
             log.info(String.format("Header '%s' = %s", key, value.stream().collect(Collectors.joining("|"))));

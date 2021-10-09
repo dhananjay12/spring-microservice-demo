@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +19,9 @@ import org.springframework.web.client.RestTemplate;
 @RestController
 @Slf4j
 public class ServiceOneController {
+
+    @Autowired
+    ApplicationContext context;
 
     RestTemplate restTemplate;
 
@@ -73,12 +77,12 @@ public class ServiceOneController {
     public Map<String, Map<String, String>> hopHeaders(@RequestHeader MultiValueMap<String, String> headers) {
 
         log.info("hop headers");
+        log.info("server.forward-headers-strategy = "+ context.getEnvironment().getProperty("server.forward-headers-strategy"));
 
         Map<String, Map<String, String>> result = new HashMap<>();
         Map<String, String> requestHeaders = new HashMap<>();
 
         headers.forEach((key, value) -> {
-            log.info(String.format("Header '%s' = %s", key, value.stream().collect(Collectors.joining("|"))));
             requestHeaders.put(key, value.stream().collect(Collectors.joining("|")));
         });
         result.put("service-one",requestHeaders);
