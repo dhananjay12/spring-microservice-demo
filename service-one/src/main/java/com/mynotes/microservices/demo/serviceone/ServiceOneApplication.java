@@ -38,8 +38,8 @@ public class ServiceOneApplication {
 					= new BufferingClientHttpRequestFactory(new SimpleClientHttpRequestFactory());
 			restTemplate = new RestTemplate(factory);
 			List<ClientHttpRequestInterceptor> interceptors = getInterceptors(restTemplate);
-			interceptors.add(new LoggingRequestResponse());
 			interceptors.add(new RestTemplateCopyHeaders());
+			interceptors.add(new LoggingRequestResponse());
 			restTemplate.setInterceptors(interceptors);
 		} else {
 			restTemplate = new RestTemplate();
