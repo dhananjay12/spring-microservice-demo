@@ -22,7 +22,7 @@ public class RestTemplateCopyHeaders implements ClientHttpRequestInterceptor {
             Enumeration<String> headers = incomingRequest.get().getHeaderNames();
             while (headers.hasMoreElements()){
                 String originalRequestHeader = headers.nextElement();
-                String originalRequestHeaderValue = headers.nextElement();
+                String originalRequestHeaderValue = incomingRequest.get().getHeader(originalRequestHeader);
                 log.info("Original request header={} with value={}",originalRequestHeader,originalRequestHeaderValue);
                 if(!request.getHeaders().containsKey(originalRequestHeader)){
                     log.info("Setting request header={} with value={} to new request",originalRequestHeader,originalRequestHeaderValue);
