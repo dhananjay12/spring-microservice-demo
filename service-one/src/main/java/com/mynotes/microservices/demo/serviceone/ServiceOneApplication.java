@@ -1,10 +1,10 @@
 package com.mynotes.microservices.demo.serviceone;
 
+import com.mynotes.microservices.demo.serviceone.interceptors.LoggingRequestResponse;
+import com.mynotes.microservices.demo.serviceone.interceptors.RestTemplateCopyHeaders;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -37,17 +37,26 @@ public class ServiceOneApplication {
 			ClientHttpRequestFactory factory
 					= new BufferingClientHttpRequestFactory(new SimpleClientHttpRequestFactory());
 			restTemplate = new RestTemplate(factory);
-			List<ClientHttpRequestInterceptor> interceptors = restTemplate.getInterceptors();
-			if (CollectionUtils.isEmpty(interceptors)) {
-				interceptors = new ArrayList<>();
-			}
-			interceptors.add(new LoggingInterceptor());
+			List<ClientHttpRequestInterceptor> interceptors = getInterceptors(restTemplate);
+			interceptors.add(new LoggingRequestResponse());
+			interceptors.add(new RestTemplateCopyHeaders());
 			restTemplate.setInterceptors(interceptors);
 		} else {
 			restTemplate = new RestTemplate();
+			List<ClientHttpRequestInterceptor> interceptors = getInterceptors(restTemplate);
+			interceptors.add(new RestTemplateCopyHeaders());
+			restTemplate.setInterceptors(interceptors);
 		}
 
 		return restTemplate;
+	}
+
+	private List<ClientHttpRequestInterceptor> getInterceptors(RestTemplate restTemplate) {
+		List<ClientHttpRequestInterceptor> interceptors = restTemplate.getInterceptors();
+		if (CollectionUtils.isEmpty(interceptors)) {
+			interceptors = new ArrayList<>();
+		}
+		return interceptors;
 	}
 
 }

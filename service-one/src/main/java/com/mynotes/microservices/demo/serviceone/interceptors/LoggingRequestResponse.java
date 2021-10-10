@@ -1,4 +1,4 @@
-package com.mynotes.microservices.demo.serviceone;
+package com.mynotes.microservices.demo.serviceone.interceptors;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,7 +12,7 @@ import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.http.client.ClientHttpResponse;
 
 @Slf4j
-public class LoggingInterceptor implements ClientHttpRequestInterceptor {
+public class LoggingRequestResponse implements ClientHttpRequestInterceptor {
 
     @Override
     public ClientHttpResponse intercept(
