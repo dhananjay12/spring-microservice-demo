@@ -16,39 +16,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import javax.servlet.http.HttpServletRequest;
+
 @RestController
 @Slf4j
 public class ServiceOneController {
 
-    @Autowired
     ApplicationContext context;
 
     RestTemplate restTemplate;
 
-    public ServiceOneController(RestTemplate rest){
+    public ServiceOneController(RestTemplate rest,ApplicationContext context){
         this.restTemplate = rest;
-    }
-
-    @RequestMapping(value = "/hop/{status}", method = RequestMethod.GET)
-    @ResponseBody
-    public String hop(@PathVariable("status") Integer status) {
-
-        log.info("hop status passed" + status);
-
-        String result = restTemplate.getForObject("http://service-two/status/" + status, String.class);
-
-        return "Service one" + status + "  ++++ " + result;
-    }
-
-    @RequestMapping(value = "/message/{text}", method = RequestMethod.GET)
-    @ResponseBody
-    public String text(@PathVariable("text") String text) {
-
-        log.info("Text passed==" + text);
-
-        String result = restTemplate.getForObject("http://service-two/message/" + text, String.class);
-
-        return "Service one+++++" + result;
+        this.context = context;
     }
 
     @RequestMapping(value = "/hello", method = RequestMethod.GET)
@@ -72,27 +52,20 @@ public class ServiceOneController {
         return map;
     }
 
-    @RequestMapping(value = "/hop/headers", method = RequestMethod.GET)
+    @RequestMapping(value = "/ip", method = RequestMethod.GET)
     @ResponseBody
-    public Map<String, Map<String, String>> hopHeaders(@RequestHeader MultiValueMap<String, String> headers) {
+    public Map<String, String> ip(@RequestHeader MultiValueMap<String, String> headers,
+                                                  HttpServletRequest httpServletRequest) {
 
-        log.info("hop headers");
-        log.info("server.forward-headers-strategy = "+ context.getEnvironment().getProperty("server.forward-headers-strategy"));
+        Map<String, String> serviceOneResult = new HashMap<>();
 
-        Map<String, Map<String, String>> result = new HashMap<>();
-        Map<String, String> requestHeaders = new HashMap<>();
+        serviceOneResult.put("server.forward-headers-strategy",context.getEnvironment().getProperty("server.forward-headers-strategy"));
+        serviceOneResult.put("x-forwarded-For",headers.getFirst("x-forwarded-for"));
+        serviceOneResult.put("forwarded",headers.getFirst("forwarded"));
+        serviceOneResult.put("httpServletRequest.getRequestURI()",httpServletRequest.getRequestURI());
+        serviceOneResult.put("httpServletRequest.getRemoteAddr()",httpServletRequest.getRemoteAddr());
 
-        headers.forEach((key, value) -> {
-            requestHeaders.put(key, value.stream().collect(Collectors.joining("|")));
-        });
-        result.put("service-one",requestHeaders);
-
-
-        Map<String, String> response = restTemplate.getForEntity("http://service-two/headers", Map.class).getBody();
-
-        result.put("service-two", response);
-
-        return result;
+        return serviceOneResult;
     }
 
 }

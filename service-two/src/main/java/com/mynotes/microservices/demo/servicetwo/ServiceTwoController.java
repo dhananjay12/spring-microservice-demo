@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+
 @RestController
 @Slf4j
 public class ServiceTwoController {
@@ -76,6 +78,22 @@ public class ServiceTwoController {
         });
 
         return map;
+    }
+
+    @RequestMapping(value = "/ip", method = RequestMethod.GET)
+    @ResponseBody
+    public Map<String, String> ip(@RequestHeader MultiValueMap<String, String> headers,
+                                  HttpServletRequest httpServletRequest) {
+
+        Map<String, String> serviceOneResult = new HashMap<>();
+
+        serviceOneResult.put("server.forward-headers-strategy",context.getEnvironment().getProperty("server.forward-headers-strategy"));
+        serviceOneResult.put("x-forwarded-For",headers.getFirst("x-forwarded-for"));
+        serviceOneResult.put("forwarded",headers.getFirst("forwarded"));
+        serviceOneResult.put("httpServletRequest.getRequestURI()",httpServletRequest.getRequestURI());
+        serviceOneResult.put("httpServletRequest.getRemoteAddr()",httpServletRequest.getRemoteAddr());
+
+        return serviceOneResult;
     }
 
 }
