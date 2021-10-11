@@ -1,0 +1,39 @@
+@startuml
+title server.forward-headers-strategy=null for Service 1/2
+actor "Browser/Postman" as B
+participant "Proxy" as P #Teal
+participant "Gateway" as G #SkyBlue
+participant "Service One" as S1 #Orange
+participant "Service Two" as S2 #Yellow
+
+B -> P : /api/service-one/url
+P -> G : /api/service-one/url
+note right of P #Teal
+ X-Forwarded-For: 192.168.65.3
+ X-Real-IP: 192.168.65.3
+end note
+G -> S1: /url
+note right of G #SkyBlue
+ X-Forwarded-For: 192.168.65.3,192.168.6.3
+ X-Real-IP: 192.1.68.65.3
+ Forwarded: proto=http;host=kubernetes.docker.internal;for="192.168.65.3:44722"
+end note
+
+note over S1 #Orange
+In controller requestObject:
+"getRemoteAddr()": "192.168.65.3",
+"x-forwarded-For": null,
+"forwarded": "proto=http;host=kubernetes.docker.internal;for="192.168.65.3:44722""
+end note
+S1 -> S2: /some-other-url
+note right of S1 #Orange
+ X-Real-IP: 192.1.68.65.3
+ Forwarded: proto=http;host=kubernetes.docker.internal;for="192.168.65.3:44722"
+end note
+note over S2 #Yellow
+In controller requestObject:
+"getRemoteAddr()": "10.1.6.246",
+"x-forwarded-For": null,
+"forwarded": "proto=http;host=kubernetes.docker.internal;for="192.168.65.3:44722""
+end note
+@enduml
