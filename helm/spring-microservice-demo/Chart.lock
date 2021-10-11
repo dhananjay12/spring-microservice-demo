@@ -1,0 +1,15 @@
+dependencies:
+- name: ingress-nginx
+  repository: https://kubernetes.github.io/ingress-nginx
+  version: 3.23.0
+- name: generic-chart
+  repository: https://dhananjay12.github.io/learn-helm
+  version: 0.0.1
+- name: generic-chart
+  repository: https://dhananjay12.github.io/learn-helm
+  version: 0.0.1
+- name: generic-chart
+  repository: https://dhananjay12.github.io/learn-helm
+  version: 0.0.1
+digest: sha256:93a6ec99c7a3f9e275dfec88508b6687bf56bfc006125663267939c2afd117a0
+generated: "2021-10-09T12:16:03.660909+02:00"

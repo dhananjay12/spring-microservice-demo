@@ -10,6 +10,10 @@ To build docker images for backend run following command:
 ```sh
 mvn -pl eureka-server,service-one,service-two,reactive-service,websocket-service,gateway  -Dmaven.test.skip=true package jib:dockerBuild
 ```
+or
+```
+mvn -pl service-one  -Dmaven.test.skip=true package jib:dockerBuild
+```
 
 `dockerBuild` requires your system to have the docker demon and will build images locally. `build` is more efficient but wont build images locally.
  You might need to change the `docker.image.url` in pom.xml if you are using `build`.

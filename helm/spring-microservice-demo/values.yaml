@@ -1,0 +1,112 @@
+
+gateway:
+  enabled: true
+  image:
+    repository: dhananjay12/demo-gateway
+    tag: latest #2.4.11
+    pullPolicy: Always
+  containerPort: 8080
+  service:
+    httpPort: 8080
+    targetPort: 8080
+  extraEnv:
+    "EUREKA_CLIENT_ENABLED": "false"
+    "SPRING_CLOUD_KUBERNETES_ENABLED": "true"
+    "SPRING_CLOUD_KUBERNETES_LOADBALANCER_MODE": "SERVICE"
+    "spring.cloud.gateway.httpserver.wiretap": "true"
+    "spring.cloud.gateway.httpclient.wiretap": "true"
+    "logging.level.reactor.netty": "DEBUG"
+  ingress:
+    enabled: true
+    annotations:
+      "kubernetes.io/ingress.class": "nginx"
+      "nginx.ingress.kubernetes.io/proxy-body-size": "50m"
+      "nginx.ingress.kubernetes.io/ssl-redirect": "false"
+    #    "nginx.ingress.kubernetes.io/use-regex": "true"
+    hosts:
+      - host: "kubernetes.docker.internal"
+        paths:
+          - /
+
+service-one:
+  enabled: true
+  image:
+    repository: dhananjay12/demo-service-one
+    tag: latest #2.4.11
+    pullPolicy: Always
+  containerPort: 8080
+  service:
+    httpPort: 8080
+    targetPort: 8080
+  extraEnv:
+    "EUREKA_CLIENT_ENABLED": "false"
+    "SPRING_CLOUD_KUBERNETES_ENABLED": "true"
+    "SPRING_CLOUD_KUBERNETES_LOADBALANCER_MODE": "SERVICE"
+    "logging.level.com.mynotes.microservices.demo": "DEBUG"
+    "server.forward-headers-strategy": "NATIVE"
+  ingress:
+    enabled: false
+
+service-two:
+  enabled: true
+  image:
+    repository: dhananjay12/demo-service-two
+    tag: latest #2.4.11
+    pullPolicy: Always
+  containerPort: 8080
+  service:
+    httpPort: 8080
+    targetPort: 8080
+  extraEnv:
+    "EUREKA_CLIENT_ENABLED": "false"
+    "SPRING_CLOUD_KUBERNETES_ENABLED": "true"
+    "SPRING_CLOUD_KUBERNETES_LOADBALANCER_MODE": "SERVICE"
+    "logging.level.com.mynotes.microservices.demo": "DEBUG"
+    "server.forward-headers-strategy": "FRAMEWORK"
+  ingress:
+    enabled: false
+
+#reactive-service:
+#  enabled: false
+#  image:
+#    repository: dhananjay12/demo-reactive-service
+#    tag: 2.4.5
+#    pullPolicy: Always
+#  containerPort: 8080
+#  service:
+#    httpPort: 8080
+#    targetPort: 8080
+#  extraEnv:
+#    "EUREKA_CLIENT_ENABLED": "false"
+#    "SPRING_CLOUD_KUBERNETES_ENABLED": "true"
+#    "SPRING_CLOUD_KUBERNETES_LOADBALANCER_MODE": "SERVICE"
+#
+#websocket-service:
+#  enabled: false
+#  image:
+#    repository: dhananjay12/demo-websocket-service
+#    tag: 2.4.5
+#    pullPolicy: Always
+#  containerPort: 8080
+#  service:
+#    httpPort: 8080
+#    targetPort: 8080
+#  extraEnv:
+#    "EUREKA_CLIENT_ENABLED": "false"
+#    "SPRING_CLOUD_KUBERNETES_ENABLED": "true"
+#    "SPRING_CLOUD_KUBERNETES_LOADBALANCER_MODE": "SERVICE"
+#
+#frontend:
+#  enabled: false
+#  image:
+#    repository: dhananjay12/demo-frontend
+#    tag: latest
+#    pullPolicy: Always
+#  containerPort: 80
+#  service:
+#    httpPort: 80
+#    targetPort: 80
+#  extraEnv:
+#    "EUREKA_CLIENT_ENABLED": "false"
+#    "SPRING_CLOUD_KUBERNETES_ENABLED": "true"
+#    "SPRING_CLOUD_KUBERNETES_LOADBALANCER_MODE": "SERVICE"

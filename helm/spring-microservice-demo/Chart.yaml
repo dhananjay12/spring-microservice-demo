@@ -1,0 +1,46 @@
+apiVersion: v2
+name: spring-microservice-demo
+description: A Helm Chart for spring-microservice-demo
+version: 0.0.1
+appVersion: 0.0.1
+keywords:
+  - spring
+  - helm
+maintainers:
+  - name: Dhananjay Singh
+    email: dhananjay@backbase.com
+
+dependencies:
+  - name: ingress-nginx
+    repository: https://kubernetes.github.io/ingress-nginx
+    version: 3.23.0
+  - name: generic-chart
+    repository: https://dhananjay12.github.io/learn-helm
+    version: 0.0.1
+    alias: gateway
+    condition: gateway.enabled
+  - name: generic-chart
+    repository: https://dhananjay12.github.io/learn-helm
+    version: 0.0.1
+    alias: service-one
+    condition: service-one.enabled
+  - name: generic-chart
+    repository: https://dhananjay12.github.io/learn-helm
+    version: 0.0.1
+    alias: service-two
+    condition: service-two.enabled
+#  - name: generic-chart
+#    repository: https://dhananjay12.github.io/learn-helm
+#    version: 0.0.1
+#    alias: reactive-service
+#    condition: reactive-service.enabled
+#  - name: generic-chart
+#    repository: https://dhananjay12.github.io/learn-helm
+#    version: 0.0.1
+#    alias: websocket-service
+#    condition: websocket-service.enabled
+#  - name: generic-chart
+#    repository: https://dhananjay12.github.io/learn-helm
+#    version: 0.0.1
+#    alias: frontend
+#    condition: frontend.enabled
