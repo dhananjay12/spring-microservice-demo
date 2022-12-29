@@ -1,0 +1,4 @@
+fileignoreconfig:
+- filename: .github/workflows/release.yml
+  checksum: 28b00054dce13299fa34d1f7062d3c8269308d55894e8a7ceb70a8813e369596
+version: ""
