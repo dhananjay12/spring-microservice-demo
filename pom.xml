@@ -18,7 +18,7 @@
 		<module>service-two</module>
 		<module>gateway</module>
 		<module>reactive-service</module>
-		<module>websocket-service</module>
+<!--		<module>websocket-service</module> Commented because it doenst work with java 17-->
 	</modules>
     
 </project>
