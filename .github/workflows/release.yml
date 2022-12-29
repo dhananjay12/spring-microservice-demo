@@ -18,7 +18,7 @@ jobs:
       - name: Build
         uses: actions/setup-java@v1
         with:
-          java-version: 11.0.x
+          java-version: 17.0.x
       - run: mvn clean install
 
       - name: Build Images using JIB

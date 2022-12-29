@@ -3,7 +3,7 @@ gateway:
   enabled: true
   image:
     repository: dhananjay12/demo-gateway
-    tag: latest #2.4.11
+    tag: latest #2.7.7
     pullPolicy: Always
   containerPort: 8080
   service:
@@ -32,7 +32,7 @@ service-one:
   enabled: true
   image:
     repository: dhananjay12/demo-service-one
-    tag: latest #2.4.11
+    tag: latest #2.7.7
     pullPolicy: Always
   containerPort: 8080
   service:
@@ -51,7 +51,7 @@ service-two:
   enabled: true
   image:
     repository: dhananjay12/demo-service-two
-    tag: latest #2.4.11
+    tag: latest #2.7.7
     pullPolicy: Always
   containerPort: 8080
   service:
@@ -70,7 +70,7 @@ service-two:
 #  enabled: false
 #  image:
 #    repository: dhananjay12/demo-reactive-service
-#    tag: 2.4.5
+#    tag: 2.7.7
 #    pullPolicy: Always
 #  containerPort: 8080
 #  service:
@@ -85,7 +85,7 @@ service-two:
 #  enabled: false
 #  image:
 #    repository: dhananjay12/demo-websocket-service
-#    tag: 2.4.5
+#    tag: 2.7.7
 #    pullPolicy: Always
 #  containerPort: 8080
 #  service:
