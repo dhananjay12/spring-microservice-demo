@@ -5,11 +5,12 @@
   <groupId>com.mynotes.microservices.demo</groupId>
   <artifactId>gateway</artifactId>
   <name>gateway</name>
+  <version>3.0.1-test1</version>
   <description>Demo project for Spring Boot</description>
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>2.7.7</version>
+    <version>3.0.1</version>
     <relativePath/> <!-- lookup parent from repository -->
   </parent>
 
@@ -18,11 +19,13 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <java.version>17</java.version>
-    <spring-cloud.version>2021.0.5</spring-cloud.version>
+    <spring-cloud.version>2022.0.0</spring-cloud.version>
     <skip.integration.tests>false</skip.integration.tests>
     <skip.unit.tests>false</skip.unit.tests>
     <docker.image.url>dhananjay12</docker.image.url>
     <docker.image.prefix>demo</docker.image.prefix>
+    <mockserver-netty.version>5.14.0</mockserver-netty.version>
+    <micrometer-tracing.version>1.0.1</micrometer-tracing.version>
   </properties>
 
   <dependencyManagement>
@@ -44,12 +47,12 @@
       <artifactId>spring-cloud-starter-gateway</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.springframework.cloud</groupId>
-      <artifactId>spring-cloud-starter-sleuth</artifactId>
+      <groupId>io.micrometer</groupId>
+      <artifactId>micrometer-tracing-bridge-brave</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.springframework.cloud</groupId>
-      <artifactId>spring-cloud-sleuth-zipkin</artifactId>
+      <groupId>io.zipkin.reporter2</groupId>
+      <artifactId>zipkin-reporter-brave</artifactId>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -58,6 +61,7 @@
     <dependency>
       <groupId>io.micrometer</groupId>
       <artifactId>micrometer-registry-prometheus</artifactId>
+      <scope>runtime</scope>
     </dependency>
     <dependency>
       <groupId>org.springframework.cloud</groupId>
@@ -74,6 +78,12 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.mock-server</groupId>
+      <artifactId>mockserver-netty</artifactId>
+      <version>${mockserver-netty.version}</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
