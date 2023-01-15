@@ -17,8 +17,9 @@ public class Application {
 
 	@LoadBalanced
 	@Bean
-	public WebClient webClient(){
-		return WebClient.builder().defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE).build();
+	public WebClient.Builder webClient(){
+		return WebClient.builder()
+				.defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
 	}
-	
+
 }

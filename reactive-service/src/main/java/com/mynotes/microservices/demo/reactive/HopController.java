@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 
 @RestController
 @RequestMapping("/hop")
@@ -19,13 +20,13 @@ public class HopController {
 
     private final WebClient webClient;
 
-    public HopController(WebClient webClient) {
-        this.webClient = webClient;
+    public HopController(WebClient.Builder builder) {
+        this.webClient = builder.build();
     }
 
     @RequestMapping(value = "/headers/service-one", method = RequestMethod.GET)
     @ResponseBody
-    public Map<String, Map<String, String>> hopHeadersToReactive(@RequestHeader MultiValueMap<String, String> headers) {
+    public Mono<Map<String, Map<String, String>>> hopHeadersToReactive(@RequestHeader MultiValueMap<String, String> headers) {
 
         log.info("hop headers to reactive");
 
@@ -38,10 +39,8 @@ public class HopController {
         result.put("reactive-service",requestHeaders);
 
 
-        Map<String, String> response = this.webClient.get().uri("http://service-one/headers").retrieve().bodyToMono(Map.class).block(); //Not being reactive
-
-        result.put("service-one", response);
-
-        return result;
+        return this.webClient.get().uri("http://service-one/headers").retrieve().bodyToMono(Map.class)
+                .doOnSuccess(response -> result.put("service-one", response))
+                .thenReturn(result);
     }
 }
