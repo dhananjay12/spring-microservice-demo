@@ -27,5 +27,3 @@ spring:
         enabled: false
   zipkin:
     enabled: false
-server:
-  port: 8081
