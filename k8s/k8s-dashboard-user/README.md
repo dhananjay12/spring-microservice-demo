@@ -13,3 +13,10 @@ kubectl apply -f k8s-dashboard-user
 kubectl -n kubernetes-dashboard create token admin-user
 ```
 
+To open dashboard 
+```
+kubectl proxy
+
+```
+
+http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/#/login
