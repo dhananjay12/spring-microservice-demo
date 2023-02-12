@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-two
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: service-two
+  template:
+    metadata:
+      labels:
+        app: service-two
+    spec:
+      containers:
+      - env:
+          # Make switch from Eureka to Kubernetes
+          - name: eureka.client.enabled
+            value: "false"
+          - name: spring.cloud.kubernetes.enabled
+            value: "true"
+          - name: spring.cloud.kubernetes.loadbalancer.mode
+            value: "SERVICE"
+          # Debugging and management
+          - name: logging.level.org.springframework.cloud
+            value: "DEBUG"
+          - name: management.endpoints.enabled-by-default
+            value: "true"
+          - name: management.endpoints.web.exposure.include
+            value: "*"
+        image: dhananjay12/demo-service-two:2.7.7
+        name: service-two
+        imagePullPolicy: Always
+        resources:
+          requests:
+            memory: "256Mi"
+          limits:
+            memory: "512Mi"
+        ports:
+          - containerPort: 8080
