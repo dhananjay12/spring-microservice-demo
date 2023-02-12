@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-one
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: service-one
+  template:
+    metadata:
+      labels:
+        app: service-one
+    spec:
+      containers:
+      - env:
+        # Make switch from Eureka to Kubernetes
+        - name: eureka.client.enabled
+          value: "false"
+        - name: spring.cloud.kubernetes.enabled
+          value: "true"
+        - name: spring.cloud.kubernetes.loadbalancer.mode
+          value: "SERVICE"
+        # Debugging and management
+        - name: logging.level.org.springframework.cloud
+          value: "DEBUG"
+        - name: management.endpoints.enabled-by-default
+          value: "true"
+        - name: management.endpoints.web.exposure.include
+          value: "*"
+        # Spring K8s Load Balancer
+#        - name: spring.cloud.kubernetes.loadbalancer.enabled
+#          value: "false"
+        image: dhananjay12/demo-service-one:2.7.7
+        name: service-one
+        imagePullPolicy: Always
+        resources:
+          requests:
+            memory: "256Mi"
+          limits:
+            memory: "512Mi"
+        ports:
+          - containerPort: 8080

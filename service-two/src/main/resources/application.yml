@@ -20,8 +20,6 @@ spring:
       enabled: false
       config:
         enabled: false
-      loadbalancer:
-        enabled: false
       reload:
         enabled: false
   zipkin:
