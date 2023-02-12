@@ -22,8 +22,6 @@ spring:
         enable-api: false
         enableApi: false
         enabled: false
-      loadbalancer:
-        enabled: false
       reload:
         enabled: false
   zipkin:
