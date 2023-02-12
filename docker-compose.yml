@@ -3,7 +3,8 @@ version: "3.7"
 x-common-variables: &common-variables
   eureka.client.serviceUrl.defaultZone: http://eureka:8080/eureka
   eureka.instance.non-secure-port: 8080
-
+  spring.sleuth.propagation.type: w3c,b3
+  #management.tracing.propagation.type: "B3"
 services:
   eureka:
     image: "dhananjay12/demo-eureka-server:latest"

@@ -1,5 +1,6 @@
 package com.mynotes.microservices.demo.serviceone;
 
+import jakarta.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -9,7 +10,6 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
-import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping("/hop")
@@ -66,6 +66,28 @@ public class HopController {
         Map<String, String> response = restTemplate.getForEntity("http://service-two/headers", Map.class).getBody();
 
         result.put("service-two", response);
+
+        return result;
+    }
+
+    @RequestMapping(value = "/headers/reactive", method = RequestMethod.GET)
+    @ResponseBody
+    public Map<String, Map<String, String>> hopHeadersToReactive(@RequestHeader MultiValueMap<String, String> headers) {
+
+        log.info("hop headers to reactive");
+
+        Map<String, Map<String, String>> result = new HashMap<>();
+        Map<String, String> requestHeaders = new HashMap<>();
+
+        headers.forEach((key, value) -> {
+            requestHeaders.put(key, value.stream().collect(Collectors.joining("|")));
+        });
+        result.put("service-one",requestHeaders);
+
+
+        Map<String, String> response = restTemplate.getForEntity("http://reactive-service/headers", Map.class).getBody();
+
+        result.put("reactive-service", response);
 
         return result;
     }

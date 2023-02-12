@@ -31,7 +31,7 @@ spec:
         # Spring K8s Load Balancer
 #        - name: spring.cloud.kubernetes.loadbalancer.enabled
 #          value: "false"
-        image: dhananjay12/demo-service-one:2.7.7
+        image: dhananjay12/demo-service-one:3.0.2
         name: service-one
         imagePullPolicy: Always
         resources:

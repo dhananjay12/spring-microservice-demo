@@ -1,5 +1,6 @@
 package com.mynotes.microservices.demo.serviceone.interceptors;
 
+import jakarta.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.Enumeration;
 import java.util.Optional;
@@ -11,7 +12,6 @@ import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import javax.servlet.http.HttpServletRequest;
 
 @Slf4j
 public class RestTemplateCopyHeaders implements ClientHttpRequestInterceptor {

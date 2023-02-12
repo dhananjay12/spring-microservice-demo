@@ -3,27 +3,19 @@ version: "3.7"
 x-common-variables: &common-variables
   EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:8080/eureka
   EUREKA_INSTANCE_NONSECUREPORT: 8080
-  SPRING_ZIPKIN_ENABLED: 'false'
-#  SPRING_ZIPKIN_BASEURL: 'http://zipkin:9411'
-  #management.tracing.sampling.probability: "1.0"
-  #management.zipkin.tracing.endpoint: "http://zipkin:9411/api/v2/spans"
-  #traceID and spanId are predefined MDC keys - we want the logs to include them
+  SPRING_ZIPKIN_ENABLED: 'true'
+  SPRING_ZIPKIN_BASEURL: 'http://zipkin:9411'
+  spring.sleuth.sampler.percentage: "1.0"
   logging.pattern.level: "%5p [%cn,%X{traceId:-},%X{spanId:-}]"
 services:
   eureka:
-    image: "dhananjay12/demo-eureka-server:latest"
+    image: "dhananjay12/demo-eureka-server:2.7.7"
     environment:
       <<: *common-variables
     ports:
       - "8761:8080"
-  frontend:
-    image: "dhananjay12/demo-frontend:latest"
-    volumes:
-      - ./config/frontend/nginx.conf:/etc/nginx/nginx.conf
-    ports:
-      - "80:80"
   gateway:
-    image: "dhananjay12/demo-gateway:latest"
+    image: "dhananjay12/demo-gateway:2.7.7"
     environment:
       <<: *common-variables
       #spring.cloud.kubernetes.enabled: "false"
@@ -38,17 +30,13 @@ services:
     ports:
       - "8080:8080"
   service-one:
-    image: "dhananjay12/demo-service-one:latest"
+    image: "dhananjay12/demo-service-one:2.7.7"
     environment:
       <<: *common-variables
-      #Required if using old version like 2.7.7
-      #spring.sleuth.propagation.type: w3c,b3
-      #SPRING_ZIPKIN_BASEURL: 'http://zipkin:9411'
-      #SPRING_ZIPKIN_ENABLED: "false"
     ports:
       - "8100:8080"
   service-two:
-    image: "dhananjay12/demo-service-two:latest"
+    image: "dhananjay12/demo-service-two:2.7.7"
     environment:
       <<: *common-variables
     ports:
