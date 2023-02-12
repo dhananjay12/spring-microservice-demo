@@ -9,7 +9,7 @@ Setup Details
     - configs it to audit requests to the Kubernetes API Server: get, watch and describe Services and Endpoints
 - install test apps
 - sets up a port-forward to the `service-one`
-- make 10 curl requests to `service-one` that will result in a call to `service-two`
+- make 10 curl requests to `service-one` (`/hop/headers`) that will result in a call to `service-two` (`/headers`)
     - log the curl request-response and the kubernetes api-requests defined above
 
 
