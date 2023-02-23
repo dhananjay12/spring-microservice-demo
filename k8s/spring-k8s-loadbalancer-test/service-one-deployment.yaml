@@ -29,9 +29,9 @@ spec:
         - name: management.endpoints.web.exposure.include
           value: "*"
         # Spring K8s Load Balancer
-#        - name: spring.cloud.kubernetes.loadbalancer.enabled
-#          value: "false"
-        image: dhananjay12/demo-service-one:3.0.2
+        - name: loadbalancer.client.name
+          value: "service-two"
+        image: dhananjay12/demo-service-one:3.0.2-fix
         name: service-one
         imagePullPolicy: Always
         resources:
