@@ -15,8 +15,10 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 
 public class GatewayApplicationBaseIT {
 
-    protected static int mockServerPort;
-    protected static ClientAndServer mockServer;
+    protected static int mockTestServerPort;
+    protected static int mockExternalServerPort;
+    protected static ClientAndServer mockTestServer;
+    protected static ClientAndServer mockExternalServer;
     protected WebTestClient webClient;
     @LocalServerPort
     private int port;
@@ -26,28 +28,36 @@ public class GatewayApplicationBaseIT {
 
         LoggingSystem.get(ClassLoader.getSystemClassLoader()).setLogLevel(Logger.ROOT_LOGGER_NAME, LogLevel.TRACE);
 
-        mockServerPort = PortFactory.findFreePort();
+        mockTestServerPort = PortFactory.findFreePort();
+        mockExternalServerPort = PortFactory.findFreePort();
 
-        System.setProperty("it.mock.server.port", String.valueOf(mockServerPort));
-
+        System.setProperty("it.mock.server.port", String.valueOf(mockTestServerPort));
+        System.setProperty("it.external.server.port", String.valueOf(mockExternalServerPort));
     }
 
     @AfterAll
     public static void afterClass() {
         System.clearProperty("it.mock.server.port");
+        System.clearProperty("it.external.server.port");
+        System.clearProperty("it.mock.zipkin.port");
     }
 
     @BeforeEach
     public void setUp() {
         webClient = WebTestClient.bindToServer()
-                .responseTimeout(Duration.ofSeconds(5))
+                .responseTimeout(Duration.ofSeconds(60))
                 .baseUrl("http://localhost:" + port)
                 .build();
+        mockTestServer = ClientAndServer.
+                startClientAndServer(mockTestServerPort);
+        mockExternalServer = ClientAndServer.
+                startClientAndServer(mockExternalServerPort);
     }
 
     @AfterEach
     public void afterEach() {
-        mockServer.stop();
+        mockTestServer.stop();
+        mockExternalServer.stop();
         webClient.delete();
     }
 

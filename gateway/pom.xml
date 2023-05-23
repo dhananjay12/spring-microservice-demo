@@ -83,6 +83,18 @@
       <version>${mockserver-netty.version}</version>
       <scope>test</scope>
     </dependency>
+    <!--Sleuth IT dep -->
+    <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-sleuth-tests-common</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.zipkin.brave</groupId>
+      <artifactId>brave-tests</artifactId>
+      <scope>test</scope>
+    </dependency>
+
   </dependencies>
 
   <build>
@@ -155,7 +167,7 @@
           <to>
             <image>${docker.image.url}/${docker.image.prefix}-${project.artifactId}</image>
             <tags>
-              <tag>${project.version}</tag>
+              <tag>2.7.7-test</tag>
             </tags>
           </to>
           <container>

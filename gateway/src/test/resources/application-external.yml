@@ -1,0 +1,10 @@
+spring:
+  cloud:
+    gateway:
+      default-filters:
+        -  ExternalService
+
+app:
+  external:
+    service:
+      url: http://localhost:${it.external.server.port}/external-service

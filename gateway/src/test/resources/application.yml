@@ -11,11 +11,3 @@ spring:
           order: 1
           predicates:
             - Path=/test
-management:
-  tracing:
-    baggage:
-      correlation:
-        fields:
-          - test
-      remote-fields:
-        - test

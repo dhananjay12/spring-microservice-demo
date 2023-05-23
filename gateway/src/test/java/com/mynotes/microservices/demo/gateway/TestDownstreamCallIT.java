@@ -16,8 +16,7 @@ public class TestDownstreamCallIT extends GatewayApplicationBaseIT {
 
     @Test
     void test(){
-        mockServer = ClientAndServer.startClientAndServer(mockServerPort);
-        mockServer.when(
+        mockTestServer.when(
                         request()
                                 .withPath("/test")
                 )
