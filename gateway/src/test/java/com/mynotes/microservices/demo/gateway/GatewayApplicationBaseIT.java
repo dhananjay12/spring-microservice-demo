@@ -39,7 +39,6 @@ public class GatewayApplicationBaseIT {
     public static void afterClass() {
         System.clearProperty("it.mock.server.port");
         System.clearProperty("it.external.server.port");
-        System.clearProperty("it.mock.zipkin.port");
     }
 
     @BeforeEach
