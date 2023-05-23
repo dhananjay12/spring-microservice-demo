@@ -33,7 +33,7 @@ public class ExternalServiceGatewayFilterFactoryIT extends GatewayApplicationBas
 
     @Test
     void test() {
-
+        span.start();
         //mock external server to reponse with 200 and dummy value
         mockExternalServer.when(
                         request()
@@ -56,10 +56,9 @@ public class ExternalServiceGatewayFilterFactoryIT extends GatewayApplicationBas
                 .exchange()
                 .expectStatus().isOk();
 
-        //assert spans count
-//        assertEquals(2, spans.spans().size());
-//        span.finish();
-//        BraveTestTracing testTracing;
+
+        assertEquals(2, spans.spans().size());
+        span.finish();
 
     }
 }
