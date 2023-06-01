@@ -21,7 +21,7 @@ services:
 #    ports:
 #      - "80:80"
   gateway:
-    image: "dhananjay12/demo-gateway:2.7.7-test"
+    image: "dhananjay12/demo-gateway:webclient1"
     environment:
       <<: *common-variables
       spring.application.json: "{\n\"spring\":{\n\"cloud\":{\n\"gateway\":{\n\"default-filters\":[\n\"ExternalService\"\n]\n}\n}\n}\n}"

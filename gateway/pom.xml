@@ -167,7 +167,7 @@
           <to>
             <image>${docker.image.url}/${docker.image.prefix}-${project.artifactId}</image>
             <tags>
-              <tag>2.7.7-test</tag>
+              <tag>${project.version}</tag>
             </tags>
           </to>
           <container>
